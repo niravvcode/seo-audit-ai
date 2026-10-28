@@ -9,7 +9,11 @@ import {
   AIExecutiveSummary
 } from '../types'
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000/api/v1'
+const API_BASE_URL =
+  import.meta.env.VITE_API_URL ||
+  (import.meta.env.PROD
+    ? 'https://seo-audit-ai-backend.onrender.com/api/v1'
+    : 'http://127.0.0.1:8000/api/v1')
 
 const apiClient = axios.create({
   baseURL: API_BASE_URL,
