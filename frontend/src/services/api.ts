@@ -6,7 +6,11 @@ import {
   SEOIssue,
   IssueStatus,
   AIRecommendation,
-  AIExecutiveSummary
+  AIExecutiveSummary,
+  KeywordDensityResult,
+  PageSpeedResult,
+  ComparisonResult,
+  ScheduledAuditItem
 } from '../types'
 
 const API_BASE_URL =
@@ -87,6 +91,40 @@ export const api = {
     const res = await apiClient.post<AIExecutiveSummary>('/ai/executive-summary', {
       audit_id: auditId,
     })
+    return res.data
+  },
+
+  // Keyword Density
+  getKeywordDensity: async (auditId: number): Promise<KeywordDensityResult> => {
+    const res = await apiClient.get<KeywordDensityResult>(`/audits/${auditId}/keywords`)
+    return res.data
+  },
+
+  // PageSpeed & Core Web Vitals
+  getPageSpeed: async (url: string, strategy: 'mobile' | 'desktop' = 'mobile'): Promise<PageSpeedResult> => {
+    const res = await apiClient.get<PageSpeedResult>('/pagespeed', { params: { url, strategy } })
+    return res.data
+  },
+
+  // Competitor Head-to-Head Comparison
+  compareCompetitors: async (urlA: string, urlB: string): Promise<ComparisonResult> => {
+    const res = await apiClient.post<ComparisonResult>('/compare', { url_a: urlA, url_b: urlB })
+    return res.data
+  },
+
+  // Scheduled Monitoring
+  listSchedules: async (): Promise<ScheduledAuditItem[]> => {
+    const res = await apiClient.get<ScheduledAuditItem[]>('/schedules')
+    return res.data
+  },
+
+  createSchedule: async (data: { target_url: string; email: string; frequency: string }): Promise<ScheduledAuditItem> => {
+    const res = await apiClient.post<ScheduledAuditItem>('/schedules', data)
+    return res.data
+  },
+
+  deleteSchedule: async (id: number): Promise<{ message: string }> => {
+    const res = await apiClient.delete(`/schedules/${id}`)
     return res.data
   },
 

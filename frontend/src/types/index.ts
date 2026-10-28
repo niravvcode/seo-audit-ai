@@ -101,3 +101,69 @@ export interface AIExecutiveSummary {
   critical_risks: string[]
   immediate_actions: string[]
 }
+
+
+export interface KeywordItem {
+  keyword: string
+  count: number
+  density_percent: number
+}
+
+export interface KeywordStuffingWarning {
+  keyword: string
+  density_percent: number
+  warning: string
+}
+
+export interface KeywordDensityResult {
+  total_words: number
+  one_grams: KeywordItem[]
+  two_grams: KeywordItem[]
+  three_grams: KeywordItem[]
+  stuffing_warnings: KeywordStuffingWarning[]
+}
+
+export interface PageSpeedMetric {
+  value: string
+  label: string
+  status: 'good' | 'needs_improvement'
+}
+
+export interface PageSpeedResult {
+  source: string
+  strategy: string
+  performance_score: number
+  metrics: {
+    lcp: PageSpeedMetric
+    cls: PageSpeedMetric
+    tbt: PageSpeedMetric
+    fcp: PageSpeedMetric
+    speed_index: PageSpeedMetric
+  }
+}
+
+export interface CompetitorSide {
+  url: string
+  health_score: number
+  total_issues: number
+  critical_issues: number
+  categories: Record<string, number>
+}
+
+export interface ComparisonResult {
+  site_a: CompetitorSide
+  site_b: CompetitorSide
+  winner: string
+  score_diff: number
+  comparison_summary: string
+}
+
+export interface ScheduledAuditItem {
+  id: number
+  target_url: string
+  email: string
+  frequency: 'DAILY' | 'WEEKLY' | 'MONTHLY'
+  is_active: boolean
+  last_run_at: string | null
+  created_at: string
+}

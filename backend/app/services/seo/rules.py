@@ -424,6 +424,57 @@ def check_html_lang(soup: BeautifulSoup, url: str) -> Optional[IssueDraft]:
         )
     return None
 
+# 21. Open Graph & Social Card tags
+def check_open_graph_tags(soup: BeautifulSoup, url: str) -> List[IssueDraft]:
+    issues = []
+    og_title = soup.find("meta", property=lambda val: val and val.lower() == "og:title")
+    og_image = soup.find("meta", property=lambda val: val and val.lower() == "og:image")
+    twitter_card = soup.find("meta", attrs={"name": re.compile(r"^twitter:card$", re.I)})
+
+    if not og_title or not og_title.get("content"):
+        issues.append(IssueDraft(
+            rule_id="RULE_MISSING_OG_TITLE",
+            category=IssueCategory.ON_PAGE,
+            severity=IssueSeverity.MEDIUM,
+            title="Missing Open Graph Title (og:title)",
+            affected_url=url,
+            evidence="No <meta property=\"og:title\"> found.",
+            explanation="The page lacks an Open Graph title tag.",
+            why_it_matters="Social platforms (LinkedIn, Facebook, WhatsApp) use og:title to create rich link preview cards when shared.",
+            suggested_fix="Add <meta property=\"og:title\" content=\"Your Page Title\" /> in the <head>.",
+            estimated_effort="15 mins"
+        ))
+
+    if not og_image or not og_image.get("content"):
+        issues.append(IssueDraft(
+            rule_id="RULE_MISSING_OG_IMAGE",
+            category=IssueCategory.ON_PAGE,
+            severity=IssueSeverity.MEDIUM,
+            title="Missing Social Share Image (og:image)",
+            affected_url=url,
+            evidence="No <meta property=\"og:image\"> found.",
+            explanation="The page lacks an Open Graph preview image.",
+            why_it_matters="Shared links without images have significantly lower click-through rates and engagement across social feeds.",
+            suggested_fix="Add <meta property=\"og:image\" content=\"https://example.com/share-card.jpg\" /> (recommended 1200x630 px).",
+            estimated_effort="20 mins"
+        ))
+
+    if not twitter_card or not twitter_card.get("content"):
+        issues.append(IssueDraft(
+            rule_id="RULE_MISSING_TWITTER_CARD",
+            category=IssueCategory.ON_PAGE,
+            severity=IssueSeverity.LOW,
+            title="Missing Twitter Card Declaration",
+            affected_url=url,
+            evidence="No <meta name=\"twitter:card\"> tag found.",
+            explanation="The page does not specify a Twitter card presentation format.",
+            why_it_matters="Twitter/X uses this tag to render large visual preview cards (e.g. summary_large_image).",
+            suggested_fix="Add <meta name=\"twitter:card\" content=\"summary_large_image\"> in the <head>.",
+            estimated_effort="10 mins"
+        ))
+
+    return issues
+
 # 20. Basic response-time observations
 def check_response_time(response_time_ms: float, url: str) -> Optional[IssueDraft]:
     if response_time_ms > 3000:

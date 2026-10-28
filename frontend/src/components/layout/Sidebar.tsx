@@ -1,11 +1,13 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-import { LayoutDashboard, PlusCircle, History, BookOpen, ShieldCheck } from 'lucide-react'
+import { LayoutDashboard, PlusCircle, History, BookOpen, ShieldCheck, Swords, CalendarClock } from 'lucide-react'
 
 export const Sidebar: React.FC = () => {
   const navItems = [
     { to: '/', label: 'Dashboard', icon: <LayoutDashboard className="w-4 h-4" /> },
     { to: '/audits/new', label: 'New SEO Audit', icon: <PlusCircle className="w-4 h-4" /> },
+    { to: '/compare', label: 'Competitor Battle', icon: <Swords className="w-4 h-4" /> },
+    { to: '/schedules', label: 'Monitoring Schedules', icon: <CalendarClock className="w-4 h-4" /> },
     { to: '/audits', label: 'Audit History', icon: <History className="w-4 h-4" /> },
     { to: '/methodology', label: 'Methodology', icon: <BookOpen className="w-4 h-4" /> },
   ]

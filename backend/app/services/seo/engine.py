@@ -25,6 +25,7 @@ from app.services.seo.rules import (
     check_duplicate_titles,
     check_duplicate_content,
     check_broken_internal_links,
+    check_open_graph_tags,
 )
 from app.services.seo.scoring import calculate_seo_health_score
 
@@ -41,7 +42,9 @@ class PageAnalysisData:
         content_hash: str | None = None,
         word_count: int = 0,
         error_message: str | None = None,
-        issues: List[IssueDraft] | None = None
+        issues: List[IssueDraft] | None = None,
+        social_metadata: Dict[str, str] | None = None,
+        body_text: str = ""
     ):
         self.url = url
         self.status_code = status_code
@@ -54,6 +57,8 @@ class PageAnalysisData:
         self.word_count = word_count
         self.error_message = error_message
         self.issues = issues or []
+        self.social_metadata = social_metadata or {}
+        self.body_text = body_text
 
 class SEOEngine:
     @staticmethod
@@ -177,6 +182,20 @@ class SEOEngine:
                 if lang_issue:
                     page_issues.append(lang_issue)
 
+                # Open Graph & Twitter Social Tags
+                social_issues = check_open_graph_tags(soup, res.url)
+                page_issues.extend(social_issues)
+
+                # Extract social card metadata for visual preview
+                og_title_tag = soup.find("meta", property=lambda val: val and val.lower() == "og:title")
+                og_desc_tag = soup.find("meta", property=lambda val: val and val.lower() == "og:description")
+                og_img_tag = soup.find("meta", property=lambda val: val and val.lower() == "og:image")
+                social_meta = {
+                    "og_title": og_title_tag.get("content", "") if og_title_tag else "",
+                    "og_description": og_desc_tag.get("content", "") if og_desc_tag else "",
+                    "og_image": og_img_tag.get("content", "") if og_img_tag else "",
+                }
+
                 # Body text word count and content hash
                 body_tag = soup.find("body")
                 body_text = body_tag.get_text(" ", strip=True) if body_tag else ""
@@ -199,7 +218,9 @@ class SEOEngine:
                 content_hash=body_hash,
                 word_count=word_count,
                 error_message=res.error_message,
-                issues=page_issues
+                issues=page_issues,
+                social_metadata=locals().get("social_meta", {}),
+                body_text=body_text
             )
             page_analyses.append(page_analysis)
 

@@ -15,6 +15,10 @@ import {
   Layers,
   Shield,
   Zap,
+  ListFilter,
+  Globe,
+  AlignLeft,
+  Gauge
 } from 'lucide-react'
 import { api } from '../services/api'
 import { AuditDetail, SEOIssue, IssueStatus, AIRecommendation, AIExecutiveSummary } from '../types'
@@ -25,6 +29,10 @@ import { Modal } from '../components/ui/Modal'
 import { LoadingSpinner } from '../components/ui/LoadingSpinner'
 import { useTheme } from '../context/ThemeContext'
 import { getHealthScoreColor } from '../config/theme'
+import { SerpPreview } from '../components/audit/SerpPreview'
+import { SocialPreview } from '../components/audit/SocialPreview'
+import { KeywordAnalyzer } from '../components/audit/KeywordAnalyzer'
+import { CoreWebVitals } from '../components/audit/CoreWebVitals'
 
 export const AuditReportPage: React.FC = () => {
   const { id } = useParams<{ id: string }>()
@@ -41,6 +49,9 @@ export const AuditReportPage: React.FC = () => {
   const [categoryFilter, setCategoryFilter] = useState<string>('ALL')
   const [statusFilter, setStatusFilter] = useState<string>('ALL')
   const [searchQuery, setSearchQuery] = useState('')
+
+  // Report View Tabs
+  const [activeReportTab, setActiveReportTab] = useState<'issues' | 'previews' | 'keywords' | 'pagespeed'>('issues')
 
   // Selected Issue Modal & AI State
   const [selectedIssue, setSelectedIssue] = useState<SEOIssue | null>(null)
@@ -131,6 +142,7 @@ export const AuditReportPage: React.FC = () => {
   }
 
   // Filter issues
+  const firstPage = audit.pages && audit.pages.length > 0 ? audit.pages[0] : null
   const filteredIssues = audit.issues.filter((issue) => {
     if (severityFilter !== 'ALL' && issue.severity !== severityFilter) return false
     if (categoryFilter !== 'ALL' && issue.category !== categoryFilter) return false
@@ -283,8 +295,60 @@ export const AuditReportPage: React.FC = () => {
         </Link>
       </div>
 
-      {/* Issues Table with Filtering */}
-      <Card>
+      {/* View Tabs */}
+      <div className="flex items-center gap-2 border-b border-border pb-3 overflow-x-auto">
+        <button
+          onClick={() => setActiveReportTab('issues')}
+          className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-colors ${
+            activeReportTab === 'issues'
+              ? 'bg-primary text-text-inverse shadow-sm'
+              : 'text-text-muted hover:text-text bg-surface border border-border'
+          }`}
+        >
+          <ListFilter className="w-4 h-4" />
+          Prioritized Issues ({audit.issues.length})
+        </button>
+
+        <button
+          onClick={() => setActiveReportTab('previews')}
+          className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-colors ${
+            activeReportTab === 'previews'
+              ? 'bg-primary text-text-inverse shadow-sm'
+              : 'text-text-muted hover:text-text bg-surface border border-border'
+          }`}
+        >
+          <Globe className="w-4 h-4" />
+          SERP & Social Preview
+        </button>
+
+        <button
+          onClick={() => setActiveReportTab('keywords')}
+          className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-colors ${
+            activeReportTab === 'keywords'
+              ? 'bg-primary text-text-inverse shadow-sm'
+              : 'text-text-muted hover:text-text bg-surface border border-border'
+          }`}
+        >
+          <AlignLeft className="w-4 h-4" />
+          Keyword Density
+        </button>
+
+        <button
+          onClick={() => setActiveReportTab('pagespeed')}
+          className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-colors ${
+            activeReportTab === 'pagespeed'
+              ? 'bg-primary text-text-inverse shadow-sm'
+              : 'text-text-muted hover:text-text bg-surface border border-border'
+          }`}
+        >
+          <Gauge className="w-4 h-4" />
+          Core Web Vitals & Speed Lab
+        </button>
+      </div>
+
+      {/* Tab Content */}
+      {activeReportTab === 'issues' && (
+        <Card>
         <CardHeader className="flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="flex items-center gap-2">
             <h2 className="text-base font-semibold text-text">Prioritized SEO Issues</h2>
@@ -438,6 +502,30 @@ export const AuditReportPage: React.FC = () => {
           </table>
         </div>
       </Card>
+      )}
+
+      {activeReportTab === 'previews' && (
+        <div className="space-y-6">
+          <SerpPreview
+            initialTitle={firstPage?.title}
+            initialDescription={firstPage?.meta_description}
+            url={audit.website_url}
+          />
+          <SocialPreview
+            title={firstPage?.title}
+            description={firstPage?.meta_description}
+            url={audit.website_url}
+          />
+        </div>
+      )}
+
+      {activeReportTab === 'keywords' && (
+        <KeywordAnalyzer auditId={audit.id} />
+      )}
+
+      {activeReportTab === 'pagespeed' && (
+        <CoreWebVitals url={audit.website_url} />
+      )}
 
       {/* Issue Details & AI Fix Modal */}
       <Modal

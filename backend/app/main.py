@@ -6,6 +6,7 @@ from fastapi.responses import RedirectResponse
 
 from app.core.config import settings
 from app.db.base import Base
+import app.models  # Ensure all models are registered with Base.metadata
 from app.db.session import engine
 from app.api.api import api_router
 
@@ -21,10 +22,6 @@ except Exception as e:
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    try:
-        Base.metadata.create_all(bind=engine)
-    except Exception as e:
-        logger.error(f"Error in lifespan creating tables: {e}")
     yield
 
 app = FastAPI(
