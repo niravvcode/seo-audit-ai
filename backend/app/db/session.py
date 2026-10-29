@@ -7,13 +7,16 @@ logger = logging.getLogger(__name__)
 
 def create_db_engine():
     db_url = settings.DATABASE_URL
+    if db_url.startswith("postgres://"):
+        db_url = db_url.replace("postgres://", "postgresql://", 1)
+
     try:
         if db_url.startswith("postgresql"):
             # Test PostgreSQL connectivity with a short timeout
             engine = create_engine(
                 db_url,
                 pool_pre_ping=True,
-                connect_args={"connect_timeout": 3}
+                connect_args={"connect_timeout": 5}
             )
             with engine.connect() as conn:
                 pass
