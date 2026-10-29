@@ -128,6 +128,17 @@ export const api = {
     return res.data
   },
 
+  // Diagnostic Tools
+  checkSecurityHeaders: async (url: string) => {
+    const res = await apiClient.post('/tools/security-headers', { url })
+    return res.data
+  },
+
+  checkRobotsSitemap: async (url: string) => {
+    const res = await apiClient.post('/tools/robots-sitemap', { url })
+    return res.data
+  },
+
   // Export URLs
   getExportCsvUrl: (auditId: number) => `${API_BASE_URL}/audits/${auditId}/export/csv`,
   getExportPdfUrl: (auditId: number) => `${API_BASE_URL}/audits/${auditId}/export/pdf`,

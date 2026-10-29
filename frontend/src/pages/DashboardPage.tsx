@@ -129,70 +129,96 @@ export const DashboardPage: React.FC = () => {
 
   return (
     <div className="space-y-8">
-      {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      {/* Hero Welcome Banner */}
+      <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-primary/10 via-surface to-secondary/10 border border-primary/20 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
         <div>
-          <h1 className="text-2xl font-bold text-text">SEO Performance Dashboard</h1>
-          <p className="text-sm text-text-muted">
-            Aggregated diagnostics across {totalAudits} audited websites
+          <div className="flex items-center gap-2 mb-1.5">
+            <span className="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-primary/15 text-primary border border-primary/25">
+              SEO Command Center
+            </span>
+            <span className="text-xs text-text-muted">• {totalAudits} Active Audits</span>
+          </div>
+          <h1 className="text-2xl sm:text-3xl font-black text-text tracking-tight">
+            Comprehensive SEO Health & Diagnostics
+          </h1>
+          <p className="text-xs sm:text-sm text-text-muted mt-1 max-w-2xl leading-relaxed">
+            Monitor technical crawl blockers, Google Core Web Vitals, SERP previews, and competitor benchmarks in one unified workspace.
           </p>
         </div>
-        <Link to="/audits/new">
-          <Button icon={<PlusCircle className="w-4 h-4" />}>Start New Audit</Button>
-        </Link>
+
+        <div className="flex flex-wrap items-center gap-2.5 w-full md:w-auto">
+          <Link to="/audits/new" className="w-full sm:w-auto">
+            <Button size="md" icon={<PlusCircle className="w-4 h-4" />}>
+              Start New Audit
+            </Button>
+          </Link>
+          <Link to="/tools" className="w-full sm:w-auto">
+            <Button variant="outline" size="md">
+              Diagnostic Tools
+            </Button>
+          </Link>
+        </div>
       </div>
 
       {/* Metric Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <Card className="p-5">
+        <Card hover className="p-5 flex flex-col justify-between">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold uppercase tracking-wider text-text-muted">
+            <span className="text-xs font-bold uppercase tracking-wider text-text-muted">
               Average SEO Health
             </span>
-            <Activity className="w-4 h-4 text-primary" />
+            <div className="p-2.5 rounded-2xl bg-primary/10 text-primary">
+              <Activity className="w-4 h-4" />
+            </div>
           </div>
-          <div className="mt-3 flex items-baseline gap-2">
+          <div className="mt-4 flex items-baseline gap-2">
             <span
-              className="text-3xl font-bold"
+              className="text-3xl font-black font-mono tracking-tight"
               style={{ color: getHealthScoreColor(avgHealthScore, isDark) }}
             >
               {avgHealthScore}
             </span>
-            <span className="text-xs text-text-subtle">/ 100</span>
+            <span className="text-xs font-semibold text-text-subtle">/ 100</span>
           </div>
           <p className="mt-1 text-xs text-text-muted">Across all completed crawls</p>
         </Card>
 
-        <Card className="p-5">
+        <Card hover className="p-5 flex flex-col justify-between">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold uppercase tracking-wider text-text-muted">
+            <span className="text-xs font-bold uppercase tracking-wider text-text-muted">
               Pages Analyzed
             </span>
-            <FileText className="w-4 h-4 text-info" />
+            <div className="p-2.5 rounded-2xl bg-info/10 text-info">
+              <FileText className="w-4 h-4" />
+            </div>
           </div>
-          <div className="mt-3 text-3xl font-bold text-text">{totalPages}</div>
+          <div className="mt-4 text-3xl font-black font-mono text-text tracking-tight">{totalPages}</div>
           <p className="mt-1 text-xs text-text-muted">{totalAudits} websites crawled</p>
         </Card>
 
-        <Card className="p-5">
+        <Card hover className="p-5 flex flex-col justify-between">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold uppercase tracking-wider text-text-muted">
+            <span className="text-xs font-bold uppercase tracking-wider text-text-muted">
               Critical Blockers
             </span>
-            <Flame className="w-4 h-4 text-danger" />
+            <div className="p-2.5 rounded-2xl bg-danger/10 text-danger">
+              <Flame className="w-4 h-4" />
+            </div>
           </div>
-          <div className="mt-3 text-3xl font-bold text-danger">{totalCritical}</div>
+          <div className="mt-4 text-3xl font-black font-mono text-danger tracking-tight">{totalCritical}</div>
           <p className="mt-1 text-xs text-text-muted">Immediate action required</p>
         </Card>
 
-        <Card className="p-5">
+        <Card hover className="p-5 flex flex-col justify-between">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold uppercase tracking-wider text-text-muted">
+            <span className="text-xs font-bold uppercase tracking-wider text-text-muted">
               High Priority Issues
             </span>
-            <AlertTriangle className="w-4 h-4 text-warning" />
+            <div className="p-2.5 rounded-2xl bg-warning/10 text-warning">
+              <AlertTriangle className="w-4 h-4" />
+            </div>
           </div>
-          <div className="mt-3 text-3xl font-bold text-warning">{totalHigh}</div>
+          <div className="mt-4 text-3xl font-black font-mono text-warning tracking-tight">{totalHigh}</div>
           <p className="mt-1 text-xs text-text-muted">Impacting rankings & CTR</p>
         </Card>
       </div>

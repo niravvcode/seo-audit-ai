@@ -167,3 +167,33 @@ export interface ScheduledAuditItem {
   last_run_at: string | null
   created_at: string
 }
+
+
+export interface SecurityHeaderItem {
+  present: boolean
+  value: string | null
+  status: 'PASS' | 'FAIL' | 'WARN'
+  description: string
+}
+
+export interface SecurityHeaderAuditResult {
+  url: string
+  grade: string
+  score: number
+  headers_analyzed: Record<string, SecurityHeaderItem>
+  recommendations: string[]
+}
+
+export interface RobotsSitemapResult {
+  url: string
+  has_robots: boolean
+  robots_url: string
+  robots_content: string | null
+  disallow_rules: string[]
+  sitemaps_declared: string[]
+  has_sitemap: boolean
+  sitemap_url: string
+  sitemap_status: number
+  sitemap_urls_count: number | null
+  analysis: string
+}

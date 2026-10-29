@@ -63,23 +63,23 @@ export const ScheduledAuditsPage: React.FC = () => {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 max-w-6xl mx-auto">
       <div>
         <div className="flex items-center gap-2 mb-1">
           <CalendarClock className="w-6 h-6 text-primary" />
-          <h1 className="text-2xl font-bold text-foreground">Scheduled Monitoring & Alerting</h1>
+          <h1 className="text-2xl font-bold text-text">Scheduled Monitoring & Alerting</h1>
         </div>
-        <p className="text-sm text-foreground-secondary">
-          Configure automated cron audits to track SEO health over time and receive proactive email alerts when regressions occur.
+        <p className="text-sm text-text-muted">
+          Configure automated cron audits to track SEO health over time and receive proactive alerts when regressions occur.
         </p>
       </div>
 
       {/* Create Schedule Form */}
-      <form onSubmit={handleCreate} className="bg-surface border border-border rounded-xl p-6 shadow-sm">
-        <h3 className="text-base font-bold text-foreground mb-4">Add New Scheduled Audit</h3>
+      <form onSubmit={handleCreate} className="bg-surface border border-border rounded-2xl p-6 shadow-sm">
+        <h3 className="text-base font-bold text-text mb-4">Add New Scheduled Audit</h3>
 
         {error && (
-          <div className="mb-4 p-3 rounded-lg bg-rose-500/10 border border-rose-500/20 text-rose-500 text-xs flex items-center gap-2">
+          <div className="mb-4 p-3.5 rounded-xl bg-danger-light border border-danger/20 text-danger text-xs flex items-center gap-2">
             <AlertTriangle className="w-4 h-4 flex-shrink-0" />
             <span>{error}</span>
           </div>
@@ -87,19 +87,19 @@ export const ScheduledAuditsPage: React.FC = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
           <div>
-            <label className="block text-xs font-semibold text-foreground mb-1.5">Target Website</label>
+            <label className="block text-xs font-semibold text-text mb-1.5">Target Website</label>
             <input
               type="url"
               required
               value={targetUrl}
               onChange={(e) => setTargetUrl(e.target.value)}
               placeholder="https://example.com"
-              className="w-full px-3.5 py-2 text-sm bg-surface-raised border border-border rounded-lg text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
+              className="w-full px-4 py-2.5 text-sm bg-surface-muted border border-border rounded-xl text-text focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-foreground mb-1.5">
+            <label className="block text-xs font-semibold text-text mb-1.5">
               Notification Email
             </label>
             <input
@@ -108,16 +108,16 @@ export const ScheduledAuditsPage: React.FC = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="alerts@company.com"
-              className="w-full px-3.5 py-2 text-sm bg-surface-raised border border-border rounded-lg text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
+              className="w-full px-4 py-2.5 text-sm bg-surface-muted border border-border rounded-xl text-text focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-foreground mb-1.5">Frequency</label>
+            <label className="block text-xs font-semibold text-text mb-1.5">Frequency</label>
             <select
               value={frequency}
               onChange={(e: any) => setFrequency(e.target.value)}
-              className="w-full px-3.5 py-2 text-sm bg-surface-raised border border-border rounded-lg text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
+              className="w-full px-4 py-2.5 text-sm bg-surface-muted border border-border rounded-xl text-text focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
             >
               <option value="DAILY">Daily Check</option>
               <option value="WEEKLY">Weekly Summary</option>
@@ -126,11 +126,11 @@ export const ScheduledAuditsPage: React.FC = () => {
           </div>
         </div>
 
-        <div className="flex justify-end">
+        <div className="flex justify-end pt-2">
           <button
             type="submit"
             disabled={submitting}
-            className="px-5 py-2 rounded-lg bg-primary text-white text-sm font-semibold hover:bg-primary-hover transition-colors shadow-sm disabled:opacity-50 flex items-center gap-2"
+            className="px-6 py-2.5 rounded-xl bg-primary text-text-inverse text-sm font-semibold hover:bg-primary-hover transition-all shadow-sm shadow-primary/25 disabled:opacity-50 flex items-center gap-2"
           >
             {submitting ? (
               <>
@@ -148,19 +148,19 @@ export const ScheduledAuditsPage: React.FC = () => {
       </form>
 
       {/* Schedules List */}
-      <div className="bg-surface border border-border rounded-xl p-6 shadow-sm">
-        <h3 className="text-base font-bold text-foreground mb-4">Active Monitoring Schedules</h3>
+      <div className="bg-surface border border-border rounded-2xl p-6 shadow-sm">
+        <h3 className="text-base font-bold text-text mb-4">Active Monitoring Schedules</h3>
 
         {loading ? (
           <div className="py-12 text-center">
             <Loader2 className="w-8 h-8 text-primary animate-spin mx-auto mb-2" />
-            <p className="text-sm text-foreground-secondary">Loading recurring jobs...</p>
+            <p className="text-sm text-text-muted">Loading recurring jobs...</p>
           </div>
         ) : schedules.length === 0 ? (
-          <div className="py-12 text-center text-foreground-secondary">
-            <CalendarClock className="w-10 h-10 mx-auto text-foreground-muted mb-2 opacity-50" />
+          <div className="py-12 text-center text-text-muted">
+            <CalendarClock className="w-10 h-10 mx-auto text-text-subtle mb-2 opacity-50" />
             <p className="text-sm">No scheduled monitors configured yet.</p>
-            <p className="text-xs text-foreground-muted mt-1">
+            <p className="text-xs text-text-subtle mt-1">
               Add your first URL above to enable continuous automated health checks.
             </p>
           </div>
@@ -168,7 +168,7 @@ export const ScheduledAuditsPage: React.FC = () => {
           <div className="overflow-x-auto">
             <table className="w-full text-left text-sm">
               <thead>
-                <tr className="border-b border-border text-xs font-semibold text-foreground-secondary uppercase tracking-wider">
+                <tr className="border-b border-border text-xs font-semibold text-text-subtle uppercase tracking-wider">
                   <th className="py-3 px-4">Target Website</th>
                   <th className="py-3 px-4">Alert Recipient</th>
                   <th className="py-3 px-4">Cadence</th>
@@ -178,34 +178,34 @@ export const ScheduledAuditsPage: React.FC = () => {
               </thead>
               <tbody className="divide-y divide-border">
                 {schedules.map((item) => (
-                  <tr key={item.id} className="hover:bg-surface-raised transition-colors">
-                    <td className="py-3.5 px-4 font-medium text-foreground">
+                  <tr key={item.id} className="hover:bg-surface-hover transition-colors">
+                    <td className="py-3.5 px-4 font-medium text-text">
                       <div className="flex items-center gap-2">
-                        <Globe className="w-4 h-4 text-foreground-muted flex-shrink-0" />
+                        <Globe className="w-4 h-4 text-text-subtle flex-shrink-0" />
                         <span className="truncate max-w-xs">{item.target_url}</span>
                       </div>
                     </td>
-                    <td className="py-3.5 px-4 text-foreground-secondary">
+                    <td className="py-3.5 px-4 text-text-muted">
                       <div className="flex items-center gap-1.5 text-xs">
-                        <Mail className="w-3.5 h-3.5 text-foreground-muted" />
+                        <Mail className="w-3.5 h-3.5 text-text-subtle" />
                         <span>{item.email}</span>
                       </div>
                     </td>
                     <td className="py-3.5 px-4">
-                      <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-primary/10 text-primary">
+                      <span className="px-3 py-1 rounded-full text-xs font-semibold bg-primary/10 text-primary">
                         {item.frequency}
                       </span>
                     </td>
                     <td className="py-3.5 px-4">
-                      <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-500">
-                        <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                      <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-success">
+                        <span className="w-2 h-2 rounded-full bg-success animate-pulse" />
                         Active
                       </span>
                     </td>
                     <td className="py-3.5 px-4 text-right">
                       <button
                         onClick={() => handleDelete(item.id)}
-                        className="p-1.5 rounded-lg text-foreground-muted hover:text-rose-500 hover:bg-rose-500/10 transition-colors"
+                        className="p-1.5 rounded-lg text-text-subtle hover:text-danger hover:bg-danger/10 transition-colors"
                         title="Delete Schedule"
                       >
                         <Trash2 className="w-4 h-4" />

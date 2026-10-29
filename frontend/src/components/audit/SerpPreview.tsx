@@ -44,31 +44,31 @@ export const SerpPreview: React.FC<SerpPreviewProps> = ({
   })()
 
   return (
-    <div className="bg-surface border border-border rounded-xl p-6 shadow-sm">
+    <div className="bg-surface border border-border rounded-2xl p-6 shadow-sm">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
         <div>
-          <h3 className="text-lg font-bold text-foreground">Google SERP Snippet Preview</h3>
-          <p className="text-sm text-foreground-secondary">
+          <h3 className="text-lg font-bold text-text">Google SERP Snippet Preview</h3>
+          <p className="text-xs sm:text-sm text-text-muted">
             Simulate how this page appears on Google Search and test metadata revisions.
           </p>
         </div>
-        <div className="flex items-center gap-1 bg-surface-raised p-1 rounded-lg border border-border">
+        <div className="flex items-center gap-1 bg-surface-muted p-1 rounded-xl border border-border">
           <button
             onClick={() => setDevice('desktop')}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-semibold transition-colors ${
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors ${
               device === 'desktop'
-                ? 'bg-primary text-white shadow-sm'
-                : 'text-foreground-secondary hover:text-foreground'
+                ? 'bg-primary text-text-inverse shadow-sm'
+                : 'text-text-muted hover:text-text'
             }`}
           >
             <Monitor className="w-3.5 h-3.5" /> Desktop
           </button>
           <button
             onClick={() => setDevice('mobile')}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-semibold transition-colors ${
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors ${
               device === 'mobile'
-                ? 'bg-primary text-white shadow-sm'
-                : 'text-foreground-secondary hover:text-foreground'
+                ? 'bg-primary text-text-inverse shadow-sm'
+                : 'text-text-muted hover:text-text'
             }`}
           >
             <Smartphone className="w-3.5 h-3.5" /> Mobile
@@ -77,7 +77,7 @@ export const SerpPreview: React.FC<SerpPreviewProps> = ({
       </div>
 
       {/* Interactive Mockup */}
-      <div className="mb-6 p-4 rounded-xl bg-[#ffffff] dark:bg-[#1a1b1e] border border-border transition-all">
+      <div className="mb-6 p-5 rounded-2xl bg-[#ffffff] dark:bg-[#1a1b1e] border border-border transition-all shadow-inner">
         <div className={device === 'mobile' ? 'max-w-sm mx-auto' : 'max-w-2xl'}>
           {/* URL Breadcrumb */}
           <div className="flex items-center gap-2 mb-1 text-xs">
@@ -110,20 +110,20 @@ export const SerpPreview: React.FC<SerpPreviewProps> = ({
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
           <div className="flex justify-between items-center mb-1.5">
-            <label className="text-xs font-semibold text-foreground">SEO Title</label>
+            <label className="text-xs font-bold text-text">SEO Title</label>
             <span
-              className={`text-xs font-medium flex items-center gap-1 ${
+              className={`text-xs font-bold flex items-center gap-1 ${
                 titleStatus === 'good'
-                  ? 'text-emerald-500'
+                  ? 'text-success'
                   : titleStatus === 'warning'
-                  ? 'text-amber-500'
-                  : 'text-foreground-muted'
+                  ? 'text-warning'
+                  : 'text-text-subtle'
               }`}
             >
               {titleStatus === 'good' ? (
-                <CheckCircle className="w-3 h-3" />
+                <CheckCircle className="w-3.5 h-3.5" />
               ) : (
-                <AlertTriangle className="w-3 h-3" />
+                <AlertTriangle className="w-3.5 h-3.5" />
               )}
               {titleLength} / 60 chars
             </span>
@@ -132,27 +132,27 @@ export const SerpPreview: React.FC<SerpPreviewProps> = ({
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className="w-full px-3 py-2 text-sm bg-surface-raised border border-border rounded-lg text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
+            className="w-full px-4 py-2 text-sm bg-surface-muted border border-border rounded-xl text-text focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
             placeholder="Enter SEO title..."
           />
         </div>
 
         <div>
           <div className="flex justify-between items-center mb-1.5">
-            <label className="text-xs font-semibold text-foreground">Meta Description</label>
+            <label className="text-xs font-bold text-text">Meta Description</label>
             <span
-              className={`text-xs font-medium flex items-center gap-1 ${
+              className={`text-xs font-bold flex items-center gap-1 ${
                 descStatus === 'good'
-                  ? 'text-emerald-500'
+                  ? 'text-success'
                   : descStatus === 'warning'
-                  ? 'text-amber-500'
-                  : 'text-foreground-muted'
+                  ? 'text-warning'
+                  : 'text-text-subtle'
               }`}
             >
               {descStatus === 'good' ? (
-                <CheckCircle className="w-3 h-3" />
+                <CheckCircle className="w-3.5 h-3.5" />
               ) : (
-                <AlertTriangle className="w-3 h-3" />
+                <AlertTriangle className="w-3.5 h-3.5" />
               )}
               {descLength} / 160 chars
             </span>
@@ -161,7 +161,7 @@ export const SerpPreview: React.FC<SerpPreviewProps> = ({
             rows={2}
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            className="w-full px-3 py-2 text-sm bg-surface-raised border border-border rounded-lg text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary resize-none"
+            className="w-full px-4 py-2 text-sm bg-surface-muted border border-border rounded-xl text-text focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary resize-none"
             placeholder="Enter meta description..."
           />
         </div>

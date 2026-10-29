@@ -17,7 +17,7 @@ export const Button: React.FC<ButtonProps> = ({
   disabled,
   ...props
 }) => {
-  const baseStyles = 'inline-flex items-center justify-center font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed select-none rounded-lg'
+  const baseStyles = 'inline-flex items-center justify-center font-semibold transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed select-none rounded-xl'
 
   const sizeStyles = {
     sm: 'px-3 py-1.5 text-xs gap-1.5',
@@ -26,11 +26,11 @@ export const Button: React.FC<ButtonProps> = ({
   }
 
   const variantStyles = {
-    primary: 'bg-primary hover:bg-primary-hover text-text-inverse shadow-sm',
-    secondary: 'bg-secondary hover:bg-secondary-hover text-text-inverse shadow-sm',
-    danger: 'bg-danger hover:bg-danger-dark text-text-inverse shadow-sm',
-    outline: 'border border-border bg-surface hover:bg-surface-hover text-text',
-    ghost: 'hover:bg-surface-hover text-text',
+    primary: 'bg-primary hover:bg-primary-hover text-text-inverse shadow-sm shadow-primary/25 hover:shadow-md hover:shadow-primary/30 active:scale-[0.98]',
+    secondary: 'bg-secondary hover:bg-secondary-hover text-text-inverse shadow-sm shadow-secondary/25 hover:shadow-md active:scale-[0.98]',
+    danger: 'bg-danger hover:bg-danger-dark text-text-inverse shadow-sm shadow-danger/25 active:scale-[0.98]',
+    outline: 'border border-border bg-surface hover:bg-surface-hover text-text shadow-sm hover:border-primary/40 active:scale-[0.98]',
+    ghost: 'hover:bg-surface-hover text-text active:scale-[0.98]',
   }
 
   return (

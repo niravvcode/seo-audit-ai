@@ -212,20 +212,69 @@ export const NewAuditPage: React.FC = () => {
         </CardHeader>
         <CardBody>
           <form onSubmit={handleSubmit} className="space-y-6">
-            <Input
-              label="Target Website URL"
-              placeholder="https://example.com"
-              icon={<Globe className="w-4 h-4" />}
-              value={url}
-              onChange={(e) => {
-                setUrl(e.target.value)
-                if (urlError) validateUrl(e.target.value)
-              }}
-              error={urlError || undefined}
-              helperText="The crawler starts from this address and follows internal hyperlinks within the same domain."
-              disabled={isSubmitting}
-              required
-            />
+            <div>
+              <Input
+                label="Target Website URL"
+                placeholder="https://example.com"
+                icon={<Globe className="w-4 h-4" />}
+                value={url}
+                onChange={(e) => {
+                  setUrl(e.target.value)
+                  if (urlError) validateUrl(e.target.value)
+                }}
+                error={urlError || undefined}
+                helperText="The crawler starts from this address and follows internal hyperlinks within the same domain."
+                disabled={isSubmitting}
+                required
+              />
+
+              {/* Quick Presets */}
+              <div className="flex flex-wrap items-center gap-2 mt-2.5">
+                <span className="text-xs font-semibold text-text-subtle mr-1">Crawl Presets:</span>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setMaxPages(1)
+                    setMaxDepth(1)
+                  }}
+                  className={`px-2.5 py-1 rounded-lg text-xs font-semibold border transition-all ${
+                    maxPages === 1
+                      ? 'bg-primary text-text-inverse border-primary shadow-sm'
+                      : 'bg-surface-muted text-text-muted border-border hover:text-text'
+                  }`}
+                >
+                  Single Page (Instant)
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setMaxPages(5)
+                    setMaxDepth(2)
+                  }}
+                  className={`px-2.5 py-1 rounded-lg text-xs font-semibold border transition-all ${
+                    maxPages === 5
+                      ? 'bg-primary text-text-inverse border-primary shadow-sm'
+                      : 'bg-surface-muted text-text-muted border-border hover:text-text'
+                  }`}
+                >
+                  Quick Scan (5 Pages)
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setMaxPages(25)
+                    setMaxDepth(3)
+                  }}
+                  className={`px-2.5 py-1 rounded-lg text-xs font-semibold border transition-all ${
+                    maxPages === 25
+                      ? 'bg-primary text-text-inverse border-primary shadow-sm'
+                      : 'bg-surface-muted text-text-muted border-border hover:text-text'
+                  }`}
+                >
+                  Deep Crawl (25 Pages)
+                </button>
+              </div>
+            </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div>

@@ -9,6 +9,8 @@ import { AuditHistoryPage } from './pages/AuditHistoryPage'
 import { MethodologyPage } from './pages/MethodologyPage'
 import { CompetitorComparePage } from './pages/CompetitorComparePage'
 import { ScheduledAuditsPage } from './pages/ScheduledAuditsPage'
+import { SeoToolsPage } from './pages/SeoToolsPage'
+import { SeoChecklistPage } from './pages/SeoChecklistPage'
 
 export const App: React.FC = () => {
   return (
@@ -22,6 +24,8 @@ export const App: React.FC = () => {
             <Route path="audits" element={<AuditHistoryPage />} />
             <Route path="compare" element={<CompetitorComparePage />} />
             <Route path="schedules" element={<ScheduledAuditsPage />} />
+            <Route path="tools" element={<SeoToolsPage />} />
+            <Route path="checklist" element={<SeoChecklistPage />} />
             <Route path="methodology" element={<MethodologyPage />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Route>
