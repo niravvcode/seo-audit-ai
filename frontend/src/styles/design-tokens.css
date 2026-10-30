@@ -1,33 +1,34 @@
-/* 2026 Next-Gen Design Tokens for SEO Audit AI */
+/* Linear & Stripe Grade Centralized Design Tokens */
 :root {
-  /* Futuristic Luminescent Violet / Electric Indigo Palette */
-  --color-primary: #6366f1;
-  --color-primary-hover: #4f46e5;
-  --color-primary-light: #eef2ff;
-  --color-primary-dark: #4338ca;
+  /* Precision Palette - Light Mode */
+  --color-primary: #0f172a;           /* Linear Obsidian / Slate 900 */
+  --color-primary-hover: #1e293b;
+  --color-primary-light: #f1f5f9;
+  --color-primary-dark: #020617;
 
-  --color-secondary: #8b5cf6;
-  --color-secondary-hover: #7c3aed;
-  --color-secondary-light: #f5f3ff;
+  --color-accent: #2563eb;            /* Linear Electric Cobalt */
+  --color-accent-hover: #1d4ed8;
+  --color-accent-light: #eff6ff;
 
-  --color-accent: #06b6d4;
-  --color-accent-hover: #0891b2;
+  --color-secondary: #475569;
+  --color-secondary-hover: #334155;
+  --color-secondary-light: #f8fafc;
 
-  --color-background: #f8fafc;
+  --color-background: #f8fafc;       /* Crisp clean SaaS grey-white */
   --color-surface: #ffffff;
-  --color-surface-hover: #f1f5f9;
-  --color-surface-muted: #f8fafc;
+  --color-surface-hover: #f8fafc;
+  --color-surface-muted: #f1f5f9;
 
-  --color-text: #090d16;
+  --color-text: #0f172a;             /* Crisp High-contrast Slate */
   --color-text-muted: #64748b;
   --color-text-subtle: #94a3b8;
   --color-text-inverse: #ffffff;
 
-  --color-border: #e2e8f0;
+  --color-border: #e2e8f0;           /* Subtle 1px borders */
   --color-border-subtle: #f1f5f9;
-  --color-border-focus: #6366f1;
+  --color-border-focus: #2563eb;
 
-  /* Modern Cyber Feedback States */
+  /* Executive Semantic Feedback States */
   --color-success: #10b981;
   --color-success-light: #ecfdf5;
   --color-success-dark: #047857;
@@ -36,25 +37,25 @@
   --color-warning-light: #fffbeb;
   --color-warning-dark: #b45309;
 
-  --color-danger: #f43f5e;
-  --color-danger-light: #fff1f2;
-  --color-danger-dark: #be123c;
+  --color-danger: #ef4444;
+  --color-danger-light: #fef2f2;
+  --color-danger-dark: #b91c1c;
 
-  --color-info: #0ea5e9;
+  --color-info: #0284c7;
   --color-info-light: #f0f9ff;
   --color-info-dark: #0369a1;
 
   /* Typography */
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-mono: 'JetBrains Mono', 'Fira Code', Menlo, Monaco, monospace;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', Menlo, Monaco, Consolas, monospace;
 
   --font-size-xs: 0.75rem;
-  --font-size-sm: 0.875rem;
-  --font-size-base: 1rem;
-  --font-size-lg: 1.125rem;
-  --font-size-xl: 1.25rem;
-  --font-size-2xl: 1.5rem;
-  --font-size-3xl: 1.875rem;
+  --font-size-sm: 0.8125rem;         /* 13px - Linear standard */
+  --font-size-base: 0.875rem;        /* 14px - Linear standard body */
+  --font-size-lg: 1rem;              /* 16px */
+  --font-size-xl: 1.125rem;          /* 18px */
+  --font-size-2xl: 1.375rem;         /* 22px */
+  --font-size-3xl: 1.75rem;          /* 28px */
 
   --font-weight-normal: 400;
   --font-weight-medium: 500;
@@ -65,77 +66,80 @@
   --line-height-normal: 1.5;
   --line-height-relaxed: 1.75;
 
-  /* 2026 Smooth Rounded Curves */
-  --radius-sm: 0.5rem;
-  --radius-md: 0.75rem;
-  --radius-lg: 1rem;
-  --radius-xl: 1.25rem;
-  --radius-2xl: 1.75rem;
+  /* Polished Radii (Linear uses 8px-12px) */
+  --radius-sm: 0.375rem;             /* 6px */
+  --radius-md: 0.5rem;               /* 8px */
+  --radius-lg: 0.75rem;              /* 12px */
+  --radius-xl: 1rem;                 /* 16px */
+  --radius-2xl: 1.25rem;             /* 20px */
   --radius-full: 9999px;
 
-  /* Ambient Glass Glow Shadows */
-  --shadow-sm: 0 2px 4px 0 rgba(0, 0, 0, 0.04);
-  --shadow-md: 0 8px 20px -4px rgba(99, 102, 241, 0.12), 0 4px 8px -2px rgba(0, 0, 0, 0.04);
-  --shadow-lg: 0 16px 36px -6px rgba(99, 102, 241, 0.16), 0 6px 12px -4px rgba(0, 0, 0, 0.04);
-  --shadow-glow: 0 0 24px -2px rgba(99, 102, 241, 0.25);
+  /* Stripe/Linear Subtle Crisp Elevation Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+  --shadow-card: 0 1px 3px 0 rgba(0, 0, 0, 0.04), 0 1px 2px -1px rgba(0, 0, 0, 0.04);
+  --shadow-card-hover: 0 12px 24px -4px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
 
-  --focus-ring: 0 0 0 2px #ffffff, 0 0 0 4px #6366f1;
+  --focus-ring: 0 0 0 2px #ffffff, 0 0 0 4px #2563eb;
 
-  --chart-critical: #f43f5e;
+  --chart-critical: #ef4444;
   --chart-high: #f97316;
   --chart-medium: #f59e0b;
-  --chart-low: #6366f1;
+  --chart-low: #2563eb;
   --chart-info: #10b981;
 }
 
-/* 2026 Dark Mode: Deep Cosmic Obsidian */
+/* Linear-Grade Deep Minimalist Dark Mode */
 .dark {
-  --color-primary: #818cf8;
-  --color-primary-hover: #6366f1;
-  --color-primary-light: rgba(129, 140, 248, 0.15);
-  --color-primary-dark: #a5b4fc;
+  --color-primary: #ffffff;
+  --color-primary-hover: #f1f5f9;
+  --color-primary-light: rgba(255, 255, 255, 0.08);
+  --color-primary-dark: #cbd5e1;
 
-  --color-secondary: #a78bfa;
-  --color-secondary-hover: #8b5cf6;
-  --color-secondary-light: rgba(167, 139, 250, 0.15);
+  --color-accent: #3b82f6;
+  --color-accent-hover: #60a5fa;
+  --color-accent-light: rgba(59, 130, 246, 0.15);
 
-  --color-accent: #22d3ee;
-  --color-accent-hover: #06b6d4;
+  --color-secondary: #94a3b8;
+  --color-secondary-hover: #cbd5e1;
+  --color-secondary-light: rgba(148, 163, 184, 0.08);
 
-  --color-background: #06070b;
-  --color-surface: #0c0e17;
-  --color-surface-hover: #131726;
-  --color-surface-muted: #0f121e;
+  --color-background: #08090a;       /* Linear exact canvas backdrop */
+  --color-surface: #0e1015;          /* Elevated surface */
+  --color-surface-hover: #141720;
+  --color-surface-muted: #12141a;
 
-  --color-text: #f8fafc;
-  --color-text-muted: #94a3b8;
-  --color-text-subtle: #64748b;
-  --color-text-inverse: #06070b;
+  --color-text: #ededed;             /* Crisp pure white-tint text */
+  --color-text-muted: #8a8f98;       /* Linear secondary text */
+  --color-text-subtle: #575a65;
+  --color-text-inverse: #08090a;
 
-  --color-border: #1a1e30;
-  --color-border-subtle: #101422;
-  --color-border-focus: #818cf8;
+  --color-border: #1e222d;           /* Crisp refined 1px border */
+  --color-border-subtle: #141720;
+  --color-border-focus: #3b82f6;
 
-  --color-success: #34d399;
-  --color-success-light: rgba(52, 211, 153, 0.15);
-  --color-success-dark: #6ee7b7;
+  --color-success: #10b981;
+  --color-success-light: rgba(16, 185, 129, 0.12);
+  --color-success-dark: #34d399;
 
-  --color-warning: #fbbf24;
-  --color-warning-light: rgba(251, 191, 36, 0.15);
-  --color-warning-dark: #fde68a;
+  --color-warning: #f59e0b;
+  --color-warning-light: rgba(245, 158, 11, 0.12);
+  --color-warning-dark: #fbbf24;
 
-  --color-danger: #fb7185;
-  --color-danger-light: rgba(251, 113, 133, 0.15);
-  --color-danger-dark: #fda4af;
+  --color-danger: #f43f5e;
+  --color-danger-light: rgba(244, 63, 94, 0.12);
+  --color-danger-dark: #fb7185;
 
   --color-info: #38bdf8;
-  --color-info-light: rgba(56, 189, 248, 0.15);
+  --color-info-light: rgba(56, 189, 248, 0.12);
   --color-info-dark: #7dd3fc;
 
-  --shadow-sm: 0 2px 4px 0 rgba(0, 0, 0, 0.4);
-  --shadow-md: 0 8px 24px -4px rgba(0, 0, 0, 0.6), 0 0 12px 0 rgba(129, 140, 248, 0.08);
-  --shadow-lg: 0 20px 40px -8px rgba(0, 0, 0, 0.7), 0 0 20px -2px rgba(129, 140, 248, 0.15);
-  --shadow-glow: 0 0 30px -4px rgba(129, 140, 248, 0.35);
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.6);
+  --shadow-md: 0 4px 12px 0 rgba(0, 0, 0, 0.6);
+  --shadow-lg: 0 12px 28px 0 rgba(0, 0, 0, 0.7);
+  --shadow-card: 0 0 0 1px rgba(255, 255, 255, 0.05), 0 2px 4px rgba(0, 0, 0, 0.4);
+  --shadow-card-hover: 0 0 0 1px rgba(255, 255, 255, 0.1), 0 12px 32px rgba(0, 0, 0, 0.8);
 
-  --focus-ring: 0 0 0 2px #0c0e17, 0 0 0 4px #818cf8;
+  --focus-ring: 0 0 0 2px #0e1015, 0 0 0 4px #3b82f6;
 }

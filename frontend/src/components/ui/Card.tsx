@@ -12,9 +12,9 @@ export const Card: React.FC<CardProps> = ({
 }) => {
   return (
     <div
-      className={`bg-surface/80 backdrop-blur-md border border-border/70 rounded-2xl shadow-sm transition-all duration-300 ${
+      className={`bg-surface border border-border rounded-xl shadow-sm transition-all duration-200 ${
         hover
-          ? 'hover:shadow-xl hover:shadow-primary/10 hover:border-primary/40 hover:-translate-y-1'
+          ? 'hover:border-border-focus/40 hover:shadow-md'
           : ''
       } ${className}`}
       {...props}
@@ -29,7 +29,7 @@ export const CardHeader: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
   className = '',
   ...props
 }) => (
-  <div className={`p-5 sm:p-6 border-b border-border/70 flex items-center justify-between ${className}`} {...props}>
+  <div className={`px-5 py-4 border-b border-border flex items-center justify-between ${className}`} {...props}>
     {children}
   </div>
 )
@@ -39,7 +39,7 @@ export const CardBody: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
   className = '',
   ...props
 }) => (
-  <div className={`p-5 sm:p-6 ${className}`} {...props}>
+  <div className={`p-5 ${className}`} {...props}>
     {children}
   </div>
 )
@@ -49,7 +49,7 @@ export const CardFooter: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
   className = '',
   ...props
 }) => (
-  <div className={`p-4 sm:p-5 border-t border-border/70 bg-surface-muted/30 rounded-b-2xl flex items-center justify-between ${className}`} {...props}>
+  <div className={`px-5 py-3.5 border-t border-border bg-surface-muted/50 rounded-b-xl flex items-center justify-between ${className}`} {...props}>
     {children}
   </div>
 )

@@ -2,7 +2,7 @@ import React from 'react'
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'secondary' | 'danger' | 'outline' | 'ghost'
-  size?: 'sm' | 'md' | 'lg'
+  size?: 'xs' | 'sm' | 'md' | 'lg'
   isLoading?: boolean
   icon?: React.ReactNode
 }
@@ -17,20 +17,21 @@ export const Button: React.FC<ButtonProps> = ({
   disabled,
   ...props
 }) => {
-  const baseStyles = 'inline-flex items-center justify-center font-semibold transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed select-none rounded-xl'
+  const baseStyles = 'inline-flex items-center justify-center font-medium transition-all duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-40 disabled:cursor-not-allowed select-none rounded-lg'
 
   const sizeStyles = {
-    sm: 'px-3 py-1.5 text-xs gap-1.5',
-    md: 'px-4 py-2 text-sm gap-2',
-    lg: 'px-5 py-2.5 text-base gap-2.5',
+    xs: 'px-2.5 py-1 text-xs gap-1.5 h-7',
+    sm: 'px-3 py-1.5 text-xs gap-1.5 h-8',
+    md: 'px-3.5 py-2 text-sm gap-2 h-9',
+    lg: 'px-4 py-2.5 text-sm gap-2 h-10',
   }
 
   const variantStyles = {
-    primary: 'bg-primary hover:bg-primary-hover text-text-inverse shadow-sm shadow-primary/25 hover:shadow-md hover:shadow-primary/30 active:scale-[0.98]',
-    secondary: 'bg-secondary hover:bg-secondary-hover text-text-inverse shadow-sm shadow-secondary/25 hover:shadow-md active:scale-[0.98]',
-    danger: 'bg-danger hover:bg-danger-dark text-text-inverse shadow-sm shadow-danger/25 active:scale-[0.98]',
-    outline: 'border border-border bg-surface hover:bg-surface-hover text-text shadow-sm hover:border-primary/40 active:scale-[0.98]',
-    ghost: 'hover:bg-surface-hover text-text active:scale-[0.98]',
+    primary: 'bg-primary text-text-inverse hover:bg-primary-hover shadow-sm active:scale-[0.98]',
+    secondary: 'bg-surface-muted text-text hover:bg-surface-hover border border-border active:scale-[0.98]',
+    danger: 'bg-danger text-text-inverse hover:bg-danger-dark shadow-sm active:scale-[0.98]',
+    outline: 'border border-border bg-surface hover:bg-surface-hover hover:border-text-subtle text-text shadow-sm active:scale-[0.98]',
+    ghost: 'hover:bg-surface-hover text-text-muted hover:text-text active:scale-[0.98]',
   }
 
   return (
@@ -41,7 +42,7 @@ export const Button: React.FC<ButtonProps> = ({
     >
       {isLoading ? (
         <svg
-          className="animate-spin -ml-0.5 mr-2 h-4 w-4 text-current"
+          className="animate-spin -ml-0.5 mr-2 h-3.5 w-3.5 text-current"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
@@ -61,9 +62,9 @@ export const Button: React.FC<ButtonProps> = ({
           />
         </svg>
       ) : icon ? (
-        <span>{icon}</span>
+        <span className="shrink-0">{icon}</span>
       ) : null}
-      {children}
+      <span>{children}</span>
     </button>
   )
 }

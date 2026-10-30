@@ -16,12 +16,12 @@ export const Input: React.FC<InputProps> = ({
   id,
   ...props
 }) => {
-  const inputId = id || label?.toLowerCase().replace(/\s+/g, '-')
+  const inputId = id || (label ? label.toLowerCase().replace(/\s+/g, '-') : undefined)
 
   return (
-    <div className="w-full">
+    <div className="w-full space-y-1.5">
       {label && (
-        <label htmlFor={inputId} className="block text-sm font-medium text-text mb-1.5">
+        <label htmlFor={inputId} className="block text-xs font-semibold text-text">
           {label}
         </label>
       )}
@@ -33,14 +33,20 @@ export const Input: React.FC<InputProps> = ({
         )}
         <input
           id={inputId}
-          className={`block w-full rounded-lg border bg-surface text-text placeholder-text-subtle transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm py-2 ${
-            icon ? 'pl-10 pr-3' : 'px-3'
-          } ${error ? 'border-danger focus:ring-danger' : 'border-border'} ${className}`}
+          className={`w-full rounded-lg border bg-surface py-2 text-sm text-text placeholder:text-text-subtle transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent ${
+            icon ? 'pl-9 pr-3' : 'px-3'
+          } ${
+            error
+              ? 'border-danger focus:border-danger focus:ring-danger/20'
+              : 'border-border hover:border-text-subtle'
+          } ${className}`}
           {...props}
         />
       </div>
-      {error && <p className="mt-1.5 text-xs text-danger font-medium">{error}</p>}
-      {helperText && !error && <p className="mt-1 text-xs text-text-muted">{helperText}</p>}
+      {error && <p className="text-xs text-danger font-medium mt-1">{error}</p>}
+      {helperText && !error && (
+        <p className="text-xs text-text-muted mt-1 leading-relaxed">{helperText}</p>
+      )}
     </div>
   )
 }

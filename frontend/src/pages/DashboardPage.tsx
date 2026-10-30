@@ -7,9 +7,10 @@ import {
   Flame,
   Activity,
   ArrowRight,
-  PlusCircle,
+  Plus,
   ExternalLink,
   ShieldCheck,
+  TrendingUp
 } from 'lucide-react'
 import {
   BarChart,
@@ -73,7 +74,7 @@ export const DashboardPage: React.FC = () => {
     )
   }
 
-  // Aggregate metrics across actual saved audits
+  // Aggregate metrics
   const totalAudits = audits.length
   const totalPages = audits.reduce((acc, a) => acc + a.total_pages_crawled, 0)
   const totalIssues = audits.reduce((acc, a) => acc + a.total_issues_found, 0)
@@ -91,16 +92,16 @@ export const DashboardPage: React.FC = () => {
     return (
       <div className="space-y-6">
         <div>
-          <h1 className="text-2xl font-bold text-text">SEO Performance Dashboard</h1>
-          <p className="text-sm text-text-muted">Real-time technical and on-page audit overview</p>
+          <h1 className="text-xl font-bold tracking-tight text-text">Overview</h1>
+          <p className="text-xs text-text-muted">Real-time technical and on-page audit diagnostics</p>
         </div>
         <EmptyState
           icon={<Globe className="w-10 h-10" />}
           title="No website audits found"
-          description="You haven't run any SEO audits yet. Enter a website URL to start your first comprehensive technical audit."
+          description="You haven't run any SEO audits yet. Enter a website URL to start your first technical crawl."
           action={
             <Link to="/audits/new">
-              <Button icon={<PlusCircle className="w-4 h-4" />}>Start First Audit</Button>
+              <Button icon={<Plus className="w-4 h-4" />}>Start First Audit</Button>
             </Link>
           }
         />
@@ -128,110 +129,80 @@ export const DashboardPage: React.FC = () => {
     }))
 
   return (
-    <div className="space-y-8">
-      {/* Hero Welcome Banner */}
-      <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-primary/10 via-surface to-secondary/10 border border-primary/20 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+    <div className="space-y-6">
+      {/* Executive Clean Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-border">
         <div>
-          <div className="flex items-center gap-2 mb-1.5">
-            <span className="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-primary/15 text-primary border border-primary/25">
-              SEO Command Center
-            </span>
-            <span className="text-xs text-text-muted">• {totalAudits} Active Audits</span>
-          </div>
-          <h1 className="text-2xl sm:text-3xl font-black text-text tracking-tight">
-            Comprehensive SEO Health & Diagnostics
-          </h1>
-          <p className="text-xs sm:text-sm text-text-muted mt-1 max-w-2xl leading-relaxed">
-            Monitor technical crawl blockers, Google Core Web Vitals, SERP previews, and competitor benchmarks in one unified workspace.
+          <h1 className="text-xl font-bold tracking-tight text-text">Overview</h1>
+          <p className="text-xs text-text-muted mt-0.5">
+            Aggregated diagnostics across {totalAudits} audited websites
           </p>
         </div>
-
-        <div className="flex flex-wrap items-center gap-2.5 w-full md:w-auto">
-          <Link to="/audits/new" className="w-full sm:w-auto">
-            <Button size="md" icon={<PlusCircle className="w-4 h-4" />}>
-              Start New Audit
-            </Button>
-          </Link>
-          <Link to="/tools" className="w-full sm:w-auto">
-            <Button variant="outline" size="md">
-              Diagnostic Tools
-            </Button>
+        <div className="flex items-center gap-2">
+          <Link to="/audits/new">
+            <Button size="sm" icon={<Plus className="w-3.5 h-3.5" />}>Start Audit</Button>
           </Link>
         </div>
       </div>
 
-      {/* Metric Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <Card hover className="p-5 flex flex-col justify-between">
-          <div className="flex items-center justify-between">
-            <span className="text-xs font-bold uppercase tracking-wider text-text-muted">
-              Average SEO Health
-            </span>
-            <div className="p-2.5 rounded-2xl bg-primary/10 text-primary">
-              <Activity className="w-4 h-4" />
-            </div>
+      {/* Stripe-Grade Metric KPI Grid */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3.5">
+        <div className="p-4 rounded-xl bg-surface border border-border shadow-xs flex flex-col justify-between">
+          <div className="flex items-center justify-between text-xs text-text-muted font-medium">
+            <span>Average Health</span>
+            <Activity className="w-4 h-4 text-text-subtle" />
           </div>
-          <div className="mt-4 flex items-baseline gap-2">
+          <div className="mt-3 flex items-baseline gap-1.5">
             <span
-              className="text-3xl font-black font-mono tracking-tight"
+              className="text-2xl font-bold font-mono tracking-tight"
               style={{ color: getHealthScoreColor(avgHealthScore, isDark) }}
             >
               {avgHealthScore}
             </span>
-            <span className="text-xs font-semibold text-text-subtle">/ 100</span>
+            <span className="text-xs text-text-subtle font-mono">/ 100</span>
           </div>
-          <p className="mt-1 text-xs text-text-muted">Across all completed crawls</p>
-        </Card>
+          <div className="text-[11px] text-text-muted mt-1">Across all completed crawls</div>
+        </div>
 
-        <Card hover className="p-5 flex flex-col justify-between">
-          <div className="flex items-center justify-between">
-            <span className="text-xs font-bold uppercase tracking-wider text-text-muted">
-              Pages Analyzed
-            </span>
-            <div className="p-2.5 rounded-2xl bg-info/10 text-info">
-              <FileText className="w-4 h-4" />
-            </div>
+        <div className="p-4 rounded-xl bg-surface border border-border shadow-xs flex flex-col justify-between">
+          <div className="flex items-center justify-between text-xs text-text-muted font-medium">
+            <span>Pages Analyzed</span>
+            <FileText className="w-4 h-4 text-text-subtle" />
           </div>
-          <div className="mt-4 text-3xl font-black font-mono text-text tracking-tight">{totalPages}</div>
-          <p className="mt-1 text-xs text-text-muted">{totalAudits} websites crawled</p>
-        </Card>
+          <div className="mt-3 text-2xl font-bold font-mono text-text tracking-tight">{totalPages}</div>
+          <div className="text-[11px] text-text-muted mt-1">{totalAudits} websites crawled</div>
+        </div>
 
-        <Card hover className="p-5 flex flex-col justify-between">
-          <div className="flex items-center justify-between">
-            <span className="text-xs font-bold uppercase tracking-wider text-text-muted">
-              Critical Blockers
-            </span>
-            <div className="p-2.5 rounded-2xl bg-danger/10 text-danger">
-              <Flame className="w-4 h-4" />
-            </div>
+        <div className="p-4 rounded-xl bg-surface border border-border shadow-xs flex flex-col justify-between">
+          <div className="flex items-center justify-between text-xs text-text-muted font-medium">
+            <span>Critical Issues</span>
+            <Flame className="w-4 h-4 text-danger" />
           </div>
-          <div className="mt-4 text-3xl font-black font-mono text-danger tracking-tight">{totalCritical}</div>
-          <p className="mt-1 text-xs text-text-muted">Immediate action required</p>
-        </Card>
+          <div className="mt-3 text-2xl font-bold font-mono text-danger tracking-tight">{totalCritical}</div>
+          <div className="text-[11px] text-text-muted mt-1">Immediate indexing risks</div>
+        </div>
 
-        <Card hover className="p-5 flex flex-col justify-between">
-          <div className="flex items-center justify-between">
-            <span className="text-xs font-bold uppercase tracking-wider text-text-muted">
-              High Priority Issues
-            </span>
-            <div className="p-2.5 rounded-2xl bg-warning/10 text-warning">
-              <AlertTriangle className="w-4 h-4" />
-            </div>
+        <div className="p-4 rounded-xl bg-surface border border-border shadow-xs flex flex-col justify-between">
+          <div className="flex items-center justify-between text-xs text-text-muted font-medium">
+            <span>High Severity</span>
+            <AlertTriangle className="w-4 h-4 text-warning" />
           </div>
-          <div className="mt-4 text-3xl font-black font-mono text-warning tracking-tight">{totalHigh}</div>
-          <p className="mt-1 text-xs text-text-muted">Impacting rankings & CTR</p>
-        </Card>
+          <div className="mt-3 text-2xl font-bold font-mono text-warning tracking-tight">{totalHigh}</div>
+          <div className="text-[11px] text-text-muted mt-1">Ranking & crawl impediments</div>
+        </div>
       </div>
 
-      {/* Visual Charts */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Severity Breakdown */}
+      {/* Charts Grid */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
+        {/* Severity Distribution */}
         <Card className="lg:col-span-1">
           <CardHeader>
-            <h3 className="text-sm font-semibold text-text">Issue Severity Distribution</h3>
+            <h3 className="text-xs font-semibold uppercase tracking-wider text-text-subtle">
+              Severity Distribution
+            </h3>
           </CardHeader>
           <CardBody className="flex flex-col items-center">
-            <div className="h-52 w-full">
+            <div className="h-48 w-full">
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
                   <Pie
@@ -240,8 +211,8 @@ export const DashboardPage: React.FC = () => {
                     nameKey="name"
                     cx="50%"
                     cy="50%"
-                    innerRadius={50}
-                    outerRadius={80}
+                    innerRadius={48}
+                    outerRadius={72}
                     paddingAngle={3}
                   >
                     {severityChartData.map((entry, index) => (
@@ -250,37 +221,39 @@ export const DashboardPage: React.FC = () => {
                   </Pie>
                   <Tooltip
                     contentStyle={{
-                      backgroundColor: 'var(--color-surface)',
-                      borderColor: 'var(--color-border)',
-                      borderRadius: '0.5rem',
-                      color: 'var(--color-text)',
+                      backgroundColor: isDark ? '#141720' : '#ffffff',
+                      borderColor: isDark ? '#1e222d' : '#e2e8f0',
+                      borderRadius: '8px',
                       fontSize: '12px',
                     }}
                   />
                 </PieChart>
               </ResponsiveContainer>
             </div>
-            <div className="grid grid-cols-2 gap-x-4 gap-y-2 mt-2 w-full text-xs">
-              {severityChartData.map((item) => (
-                <div key={item.name} className="flex items-center justify-between">
-                  <div className="flex items-center gap-1.5">
-                    <span
-                      className="w-2.5 h-2.5 rounded-full"
-                      style={{ backgroundColor: item.color }}
-                    />
-                    <span className="text-text-muted">{item.name}</span>
-                  </div>
-                  <span className="font-semibold text-text">{item.value}</span>
+
+            <div className="w-full grid grid-cols-2 gap-2 mt-2 pt-3 border-t border-border text-xs">
+              {severityChartData.map((d) => (
+                <div key={d.name} className="flex items-center justify-between text-[11px]">
+                  <span className="flex items-center gap-1.5 text-text-muted">
+                    <span className="w-2 h-2 rounded-full" style={{ backgroundColor: d.color }} />
+                    {d.name}
+                  </span>
+                  <span className="font-mono font-medium text-text">{d.value}</span>
                 </div>
               ))}
             </div>
           </CardBody>
         </Card>
 
-        {/* Audit Scores History Trend */}
+        {/* Health Score Trend */}
         <Card className="lg:col-span-2">
           <CardHeader>
-            <h3 className="text-sm font-semibold text-text">Recent Audit Health Scores</h3>
+            <div className="flex items-center gap-2">
+              <h3 className="text-xs font-semibold uppercase tracking-wider text-text-subtle">
+                Audit Health Trends
+              </h3>
+            </div>
+            <span className="text-xs text-text-muted font-mono">Recent 7 Crawls</span>
           </CardHeader>
           <CardBody>
             <div className="h-64 w-full">
@@ -288,26 +261,25 @@ export const DashboardPage: React.FC = () => {
                 <BarChart data={recentAuditsTrend}>
                   <XAxis
                     dataKey="name"
-                    stroke="var(--color-text-muted)"
+                    stroke={isDark ? '#575a65' : '#94a3b8'}
                     fontSize={11}
                     tickLine={false}
                   />
                   <YAxis
-                    stroke="var(--color-text-muted)"
-                    fontSize={11}
                     domain={[0, 100]}
+                    stroke={isDark ? '#575a65' : '#94a3b8'}
+                    fontSize={11}
                     tickLine={false}
                   />
                   <Tooltip
                     contentStyle={{
-                      backgroundColor: 'var(--color-surface)',
-                      borderColor: 'var(--color-border)',
-                      borderRadius: '0.5rem',
-                      color: 'var(--color-text)',
+                      backgroundColor: isDark ? '#141720' : '#ffffff',
+                      borderColor: isDark ? '#1e222d' : '#e2e8f0',
+                      borderRadius: '8px',
                       fontSize: '12px',
                     }}
                   />
-                  <Bar dataKey="score" fill="var(--color-primary)" radius={[4, 4, 0, 0]} />
+                  <Bar dataKey="score" fill="#3b82f6" radius={[4, 4, 0, 0]} maxBarSize={36} />
                 </BarChart>
               </ResponsiveContainer>
             </div>
@@ -317,55 +289,58 @@ export const DashboardPage: React.FC = () => {
 
       {/* Recent Audits Table */}
       <Card>
-        <CardHeader>
-          <h3 className="text-sm font-semibold text-text">Recent Audits</h3>
-          <Link to="/audits" className="text-xs text-primary hover:underline flex items-center gap-1">
-            View All History <ArrowRight className="w-3.5 h-3.5" />
+        <CardHeader className="flex items-center justify-between">
+          <h3 className="text-xs font-semibold uppercase tracking-wider text-text-subtle">
+            Recent Website Audits
+          </h3>
+          <Link to="/audits" className="text-xs text-accent hover:underline flex items-center gap-1">
+            <span>View All</span>
+            <ArrowRight className="w-3 h-3" />
           </Link>
         </CardHeader>
+
         <div className="overflow-x-auto">
-          <table className="w-full text-left text-sm">
-            <thead className="bg-surface-muted/50 border-b border-border text-xs uppercase text-text-subtle font-semibold">
+          <table className="w-full text-left text-xs">
+            <thead className="bg-surface-muted/50 border-b border-border text-text-subtle uppercase tracking-wider font-semibold">
               <tr>
-                <th className="px-5 py-3">Website</th>
-                <th className="px-5 py-3">Status</th>
-                <th className="px-5 py-3">Health Score</th>
-                <th className="px-5 py-3">Pages</th>
-                <th className="px-5 py-3">Issues</th>
-                <th className="px-5 py-3">Date</th>
-                <th className="px-5 py-3 text-right">Action</th>
+                <th className="py-2.5 px-4">Website</th>
+                <th className="py-2.5 px-4">Status</th>
+                <th className="py-2.5 px-4">Health Score</th>
+                <th className="py-2.5 px-4">Pages</th>
+                <th className="py-2.5 px-4">Issues Found</th>
+                <th className="py-2.5 px-4 text-right">Actions</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-border">
               {audits.slice(0, 5).map((audit) => (
-                <tr key={audit.id} className="hover:bg-surface-hover/50 transition-colors">
-                  <td className="px-5 py-3 font-medium text-text">
-                    <span className="truncate max-w-[200px] block">{audit.website_url}</span>
+                <tr key={audit.id} className="hover:bg-surface-hover/80 transition-colors">
+                  <td className="py-3 px-4 font-medium text-text">
+                    <div className="flex items-center gap-2">
+                      <Globe className="w-3.5 h-3.5 text-text-subtle shrink-0" />
+                      <span className="truncate max-w-xs">{audit.website_url}</span>
+                    </div>
                   </td>
-                  <td className="px-5 py-3">
-                    <StatusBadge status={audit.status} size="sm" />
+                  <td className="py-3 px-4">
+                    <StatusBadge status={audit.status} />
                   </td>
-                  <td className="px-5 py-3 font-semibold">
-                    <span style={{ color: getHealthScoreColor(audit.health_score, isDark) }}>
-                      {audit.health_score.toFixed(1)}
+                  <td className="py-3 px-4">
+                    <span
+                      className="font-mono font-bold"
+                      style={{ color: getHealthScoreColor(audit.health_score, isDark) }}
+                    >
+                      {audit.health_score.toFixed(1)} / 100
                     </span>
                   </td>
-                  <td className="px-5 py-3 text-text-muted">{audit.total_pages_crawled}</td>
-                  <td className="px-5 py-3">
-                    <span className="text-text font-medium">{audit.total_issues_found}</span>
-                    {audit.critical_issues_count > 0 && (
-                      <span className="ml-1.5 text-xs text-danger font-semibold">
-                        ({audit.critical_issues_count} crit)
-                      </span>
-                    )}
+                  <td className="py-3 px-4 font-mono text-text-muted">
+                    {audit.total_pages_crawled}
                   </td>
-                  <td className="px-5 py-3 text-text-subtle text-xs">
-                    {new Date(audit.started_at).toLocaleDateString()}
+                  <td className="py-3 px-4">
+                    <span className="font-mono text-text font-medium">{audit.total_issues_found}</span>
                   </td>
-                  <td className="px-5 py-3 text-right">
+                  <td className="py-3 px-4 text-right">
                     <Link to={`/audits/${audit.id}`}>
-                      <Button variant="outline" size="sm" icon={<ExternalLink className="w-3 h-3" />}>
-                        Report
+                      <Button variant="ghost" size="xs">
+                        View Report
                       </Button>
                     </Link>
                   </td>

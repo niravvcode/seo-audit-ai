@@ -14,46 +14,12 @@
     -moz-osx-font-smoothing: grayscale;
     min-height: 100vh;
     position: relative;
-    overflow-x: hidden;
-  }
-
-  /* 2026 Ambient Cyber Gradients & Radial Glow */
-  body::before {
-    content: '';
-    position: fixed;
-    top: -20%;
-    left: -10%;
-    width: 60vw;
-    height: 60vw;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(99, 102, 241, 0.08) 0%, rgba(139, 92, 246, 0.03) 50%, transparent 70%);
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  body::after {
-    content: '';
-    position: fixed;
-    bottom: -20%;
-    right: -10%;
-    width: 50vw;
-    height: 50vw;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(6, 182, 212, 0.06) 0%, rgba(99, 102, 241, 0.02) 60%, transparent 75%);
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  .dark body::before {
-    background: radial-gradient(circle, rgba(129, 140, 248, 0.12) 0%, rgba(168, 85, 247, 0.04) 50%, transparent 70%);
-  }
-
-  .dark body::after {
-    background: radial-gradient(circle, rgba(34, 211, 238, 0.08) 0%, rgba(129, 140, 248, 0.03) 60%, transparent 75%);
+    letter-spacing: -0.011em;
   }
 
   code, pre {
     font-family: var(--font-mono);
+    letter-spacing: normal;
   }
 
   * {
@@ -61,84 +27,60 @@
   }
 }
 
-/* 2026 Ultra-Modern Glassmorphism & Micro-Interactions */
+/* Linear/Stripe Subtle Mesh Grid Accent */
+.bg-grid-pattern {
+  background-size: 24px 24px;
+  background-image: 
+    linear-gradient(to right, rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+}
+
+.dark .bg-grid-pattern {
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+}
+
+/* High-Precision Glassmorphism */
 .glass-panel {
-  background: rgba(255, 255, 255, 0.75);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(226, 232, 240, 0.8);
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--color-border);
 }
 
 .dark .glass-panel {
-  background: rgba(12, 14, 23, 0.75);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(14, 16, 21, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
 }
 
-.glow-card {
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  position: relative;
+/* Subtle Interactive Card Transition */
+.interactive-card {
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
 }
 
-.glow-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 16px 32px -8px rgba(99, 102, 241, 0.18);
-  border-color: rgba(99, 102, 241, 0.4);
+.interactive-card:hover {
+  border-color: var(--color-text-subtle);
+  box-shadow: var(--shadow-card-hover);
 }
 
-.dark .glow-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 16px 36px -8px rgba(129, 140, 248, 0.22);
-  border-color: rgba(129, 140, 248, 0.4);
+.dark .interactive-card:hover {
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
-/* 2026 Vibrant Fluid Gradient Text */
-.gradient-text {
-  background: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+/* Linear-style Minimal Text Gradient */
+.text-gradient {
+  background: linear-gradient(180deg, #ffffff 0%, rgba(255, 255, 255, 0.7) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.dark .gradient-text {
-  background: linear-gradient(135deg, #818cf8 0%, #c084fc 40%, #f472b6 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-/* Interactive Futuristic Shimmer on Buttons */
-.shimmer-btn {
-  position: relative;
-  overflow: hidden;
-}
-
-.shimmer-btn::after {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: linear-gradient(
-    60deg,
-    transparent,
-    rgba(255, 255, 255, 0.2),
-    transparent
-  );
-  transform: rotate(30deg);
-  transition: all 0.75s ease;
-  opacity: 0;
-}
-
-.shimmer-btn:hover::after {
-  opacity: 1;
-  transform: rotate(30deg) translate(20%, 20%);
-}
-
-/* Custom Minimalist Scrollbar */
+/* Custom Sleek Scrollbar */
 ::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
@@ -151,5 +93,5 @@
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-primary);
+  background: var(--color-text-subtle);
 }
