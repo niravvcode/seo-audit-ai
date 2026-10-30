@@ -10,7 +10,12 @@ import {
   Plus,
   ExternalLink,
   ShieldCheck,
-  TrendingUp
+  Cpu,
+  Layers,
+  Sparkles,
+  Zap,
+  CheckCircle2,
+  Lock
 } from 'lucide-react'
 import {
   BarChart,
@@ -59,12 +64,12 @@ export const DashboardPage: React.FC = () => {
   }
 
   if (loading) {
-    return <LoadingSpinner size="lg" label="Loading dashboard metrics..." />
+    return <LoadingSpinner size="lg" label="Initializing diagnostic telemetry..." />
   }
 
   if (error) {
     return (
-      <div className="p-6 bg-danger-light border border-danger/20 rounded-xl text-danger-dark">
+      <div className="p-6 bg-danger-light border border-danger/20 rounded-2xl text-danger-dark">
         <h3 className="font-semibold text-base mb-1">Failed to load dashboard</h3>
         <p className="text-sm">{error}</p>
         <Button className="mt-4" size="sm" onClick={loadDashboardData}>
@@ -92,8 +97,8 @@ export const DashboardPage: React.FC = () => {
     return (
       <div className="space-y-6">
         <div>
-          <h1 className="text-xl font-bold tracking-tight text-text">Overview</h1>
-          <p className="text-xs text-text-muted">Real-time technical and on-page audit diagnostics</p>
+          <h1 className="text-2xl font-bold tracking-tight text-text">Command Center</h1>
+          <p className="text-xs text-text-muted">Real-time technical and on-page diagnostic platform</p>
         </div>
         <EmptyState
           icon={<Globe className="w-10 h-10" />}
@@ -111,11 +116,11 @@ export const DashboardPage: React.FC = () => {
 
   // Severity Distribution data for chart
   const severityChartData = [
-    { name: 'Critical', value: audits.reduce((acc, a) => acc + a.critical_issues_count, 0), color: chartTokens.critical },
-    { name: 'High', value: audits.reduce((acc, a) => acc + a.high_issues_count, 0), color: chartTokens.high },
-    { name: 'Medium', value: audits.reduce((acc, a) => acc + a.medium_issues_count, 0), color: chartTokens.medium },
-    { name: 'Low', value: audits.reduce((acc, a) => acc + a.low_issues_count, 0), color: chartTokens.low },
-    { name: 'Info', value: audits.reduce((acc, a) => acc + a.info_issues_count, 0), color: chartTokens.info },
+    { name: 'Critical', value: audits.reduce((acc, a) => acc + a.critical_issues_count, 0), color: '#FF5A5F' },
+    { name: 'High', value: audits.reduce((acc, a) => acc + a.high_issues_count, 0), color: '#FF8F3D' },
+    { name: 'Medium', value: audits.reduce((acc, a) => acc + a.medium_issues_count, 0), color: '#FFB020' },
+    { name: 'Low', value: audits.reduce((acc, a) => acc + a.low_issues_count, 0), color: '#8B7CFF' },
+    { name: 'Info', value: audits.reduce((acc, a) => acc + a.info_issues_count, 0), color: '#46C8D8' },
   ]
 
   // Recent 5 audits for trend
@@ -129,80 +134,135 @@ export const DashboardPage: React.FC = () => {
     }))
 
   return (
-    <div className="space-y-6">
-      {/* Executive Clean Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-border">
-        <div>
-          <h1 className="text-xl font-bold tracking-tight text-text">Overview</h1>
-          <p className="text-xs text-text-muted mt-0.5">
-            Aggregated diagnostics across {totalAudits} audited websites
-          </p>
-        </div>
-        <div className="flex items-center gap-2">
-          <Link to="/audits/new">
-            <Button size="sm" icon={<Plus className="w-3.5 h-3.5" />}>Start Audit</Button>
-          </Link>
-        </div>
-      </div>
+    <div className="space-y-10">
+      {/* Roar AI Inspired Cinematic Hero Section */}
+      <section className="relative rounded-3xl bg-surface-muted border border-border p-8 sm:p-12 overflow-hidden shadow-lg">
+        {/* Ambient Top Glow Beam */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-32 bg-primary/15 blur-3xl pointer-events-none" />
 
-      {/* Stripe-Grade Metric KPI Grid */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3.5">
-        <div className="p-4 rounded-xl bg-surface border border-border shadow-xs flex flex-col justify-between">
-          <div className="flex items-center justify-between text-xs text-text-muted font-medium">
-            <span>Average Health</span>
-            <Activity className="w-4 h-4 text-text-subtle" />
+        <div className="relative z-10 max-w-3xl space-y-4">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary/30 bg-primary/10 text-primary text-xs font-mono font-medium">
+            <Sparkles className="w-3.5 h-3.5" />
+            <span>NEURAL CRAWLER & HEURISTIC ANALYSIS</span>
           </div>
-          <div className="mt-3 flex items-baseline gap-1.5">
+
+          <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white leading-tight">
+            Autonomous Technical SEO Intelligence.
+          </h1>
+
+          <p className="text-sm sm:text-base text-text-muted leading-relaxed max-w-2xl">
+            Continuous crawling infrastructure verifying 20+ ranking rules, Google Core Web Vitals, and Gemini-synthesized code remediation patches.
+          </p>
+
+          <div className="flex flex-wrap items-center gap-3 pt-2">
+            <Link to="/audits/new">
+              <Button size="lg" icon={<Plus className="w-4 h-4 stroke-[2.5]" />}>
+                Launch New Audit
+              </Button>
+            </Link>
+            <Link to="/tools">
+              <Button variant="outline" size="lg" icon={<Cpu className="w-4 h-4 text-accent" />}>
+                Security & Header Tools
+              </Button>
+            </Link>
+          </div>
+        </div>
+
+        {/* Roar AI System Processing Pipeline Diagram */}
+        <div className="mt-8 pt-8 border-t border-border/60 grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs font-mono">
+          <div className="p-3.5 rounded-xl bg-surface/80 border border-border space-y-1">
+            <div className="text-text-subtle text-[10px] uppercase">Phase 1: Ingestion</div>
+            <div className="text-text font-bold flex items-center gap-1.5">
+              <Globe className="w-3.5 h-3.5 text-primary" />
+              SSRF Safe Crawler
+            </div>
+          </div>
+          <div className="p-3.5 rounded-xl bg-surface/80 border border-border space-y-1">
+            <div className="text-text-subtle text-[10px] uppercase">Phase 2: Validation</div>
+            <div className="text-text font-bold flex items-center gap-1.5">
+              <Activity className="w-3.5 h-3.5 text-accent" />
+              20+ Heuristic Rules
+            </div>
+          </div>
+          <div className="p-3.5 rounded-xl bg-surface/80 border border-border space-y-1">
+            <div className="text-text-subtle text-[10px] uppercase">Phase 3: Telemetry</div>
+            <div className="text-text font-bold flex items-center gap-1.5">
+              <Zap className="w-3.5 h-3.5 text-warning" />
+              Core Web Vitals
+            </div>
+          </div>
+          <div className="p-3.5 rounded-xl bg-surface/80 border border-border space-y-1">
+            <div className="text-text-subtle text-[10px] uppercase">Phase 4: Synthesis</div>
+            <div className="text-text font-bold flex items-center gap-1.5">
+              <Sparkles className="w-3.5 h-3.5 text-success" />
+              Gemini Code Patch
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Cinematic KPI Cards */}
+      <section className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="p-6 rounded-2xl bg-surface-muted border border-border shadow-sm flex flex-col justify-between">
+          <div className="flex items-center justify-between text-xs text-text-subtle font-mono uppercase tracking-wider">
+            <span>Average Health</span>
+            <Activity className="w-4 h-4 text-primary" />
+          </div>
+          <div className="mt-4 flex items-baseline gap-2">
             <span
-              className="text-2xl font-bold font-mono tracking-tight"
+              className="text-3xl sm:text-4xl font-extrabold font-mono tracking-tight"
               style={{ color: getHealthScoreColor(avgHealthScore, isDark) }}
             >
               {avgHealthScore}
             </span>
             <span className="text-xs text-text-subtle font-mono">/ 100</span>
           </div>
-          <div className="text-[11px] text-text-muted mt-1">Across all completed crawls</div>
+          <div className="text-xs text-text-muted mt-1">Across all completed crawls</div>
         </div>
 
-        <div className="p-4 rounded-xl bg-surface border border-border shadow-xs flex flex-col justify-between">
-          <div className="flex items-center justify-between text-xs text-text-muted font-medium">
-            <span>Pages Analyzed</span>
-            <FileText className="w-4 h-4 text-text-subtle" />
+        <div className="p-6 rounded-2xl bg-surface-muted border border-border shadow-sm flex flex-col justify-between">
+          <div className="flex items-center justify-between text-xs text-text-subtle font-mono uppercase tracking-wider">
+            <span>Pages Audited</span>
+            <FileText className="w-4 h-4 text-accent" />
           </div>
-          <div className="mt-3 text-2xl font-bold font-mono text-text tracking-tight">{totalPages}</div>
-          <div className="text-[11px] text-text-muted mt-1">{totalAudits} websites crawled</div>
+          <div className="mt-4 text-3xl sm:text-4xl font-extrabold font-mono text-text tracking-tight">
+            {totalPages}
+          </div>
+          <div className="text-xs text-text-muted mt-1">{totalAudits} domains scanned</div>
         </div>
 
-        <div className="p-4 rounded-xl bg-surface border border-border shadow-xs flex flex-col justify-between">
-          <div className="flex items-center justify-between text-xs text-text-muted font-medium">
-            <span>Critical Issues</span>
+        <div className="p-6 rounded-2xl bg-surface-muted border border-border shadow-sm flex flex-col justify-between">
+          <div className="flex items-center justify-between text-xs text-text-subtle font-mono uppercase tracking-wider">
+            <span>Critical Blockers</span>
             <Flame className="w-4 h-4 text-danger" />
           </div>
-          <div className="mt-3 text-2xl font-bold font-mono text-danger tracking-tight">{totalCritical}</div>
-          <div className="text-[11px] text-text-muted mt-1">Immediate indexing risks</div>
+          <div className="mt-4 text-3xl sm:text-4xl font-extrabold font-mono text-danger tracking-tight">
+            {totalCritical}
+          </div>
+          <div className="text-xs text-text-muted mt-1">Immediate indexing penalties</div>
         </div>
 
-        <div className="p-4 rounded-xl bg-surface border border-border shadow-xs flex flex-col justify-between">
-          <div className="flex items-center justify-between text-xs text-text-muted font-medium">
+        <div className="p-6 rounded-2xl bg-surface-muted border border-border shadow-sm flex flex-col justify-between">
+          <div className="flex items-center justify-between text-xs text-text-subtle font-mono uppercase tracking-wider">
             <span>High Severity</span>
             <AlertTriangle className="w-4 h-4 text-warning" />
           </div>
-          <div className="mt-3 text-2xl font-bold font-mono text-warning tracking-tight">{totalHigh}</div>
-          <div className="text-[11px] text-text-muted mt-1">Ranking & crawl impediments</div>
+          <div className="mt-4 text-3xl sm:text-4xl font-extrabold font-mono text-warning tracking-tight">
+            {totalHigh}
+          </div>
+          <div className="text-xs text-text-muted mt-1">Ranking & crawl deficiencies</div>
         </div>
-      </div>
+      </section>
 
-      {/* Charts Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
-        {/* Severity Distribution */}
-        <Card className="lg:col-span-1">
-          <CardHeader>
-            <h3 className="text-xs font-semibold uppercase tracking-wider text-text-subtle">
-              Severity Distribution
+      {/* Visual Analytics Grid */}
+      <section className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* Severity Radial Matrix */}
+        <div className="p-6 rounded-2xl bg-surface-muted border border-border shadow-sm flex flex-col justify-between">
+          <div>
+            <h3 className="text-xs font-mono font-bold uppercase tracking-wider text-text-subtle mb-4">
+              Deficiency Distribution Matrix
             </h3>
-          </CardHeader>
-          <CardBody className="flex flex-col items-center">
-            <div className="h-48 w-full">
+            <div className="h-52 w-full">
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
                   <Pie
@@ -211,8 +271,8 @@ export const DashboardPage: React.FC = () => {
                     nameKey="name"
                     cx="50%"
                     cy="50%"
-                    innerRadius={48}
-                    outerRadius={72}
+                    innerRadius={50}
+                    outerRadius={75}
                     paddingAngle={3}
                   >
                     {severityChartData.map((entry, index) => (
@@ -221,8 +281,8 @@ export const DashboardPage: React.FC = () => {
                   </Pie>
                   <Tooltip
                     contentStyle={{
-                      backgroundColor: isDark ? '#141720' : '#ffffff',
-                      borderColor: isDark ? '#1e222d' : '#e2e8f0',
+                      backgroundColor: '#11151B',
+                      borderColor: 'rgba(255,255,255,0.1)',
                       borderRadius: '8px',
                       fontSize: '12px',
                     }}
@@ -230,117 +290,114 @@ export const DashboardPage: React.FC = () => {
                 </PieChart>
               </ResponsiveContainer>
             </div>
+          </div>
 
-            <div className="w-full grid grid-cols-2 gap-2 mt-2 pt-3 border-t border-border text-xs">
-              {severityChartData.map((d) => (
-                <div key={d.name} className="flex items-center justify-between text-[11px]">
-                  <span className="flex items-center gap-1.5 text-text-muted">
-                    <span className="w-2 h-2 rounded-full" style={{ backgroundColor: d.color }} />
-                    {d.name}
-                  </span>
-                  <span className="font-mono font-medium text-text">{d.value}</span>
-                </div>
-              ))}
-            </div>
-          </CardBody>
-        </Card>
+          <div className="grid grid-cols-2 gap-2 pt-4 border-t border-border text-xs font-mono">
+            {severityChartData.map((d) => (
+              <div key={d.name} className="flex items-center justify-between">
+                <span className="flex items-center gap-1.5 text-text-muted">
+                  <span className="w-2 h-2 rounded-full" style={{ backgroundColor: d.color }} />
+                  {d.name}
+                </span>
+                <span className="font-bold text-text">{d.value}</span>
+              </div>
+            ))}
+          </div>
+        </div>
 
-        {/* Health Score Trend */}
-        <Card className="lg:col-span-2">
-          <CardHeader>
-            <div className="flex items-center gap-2">
-              <h3 className="text-xs font-semibold uppercase tracking-wider text-text-subtle">
-                Audit Health Trends
-              </h3>
-            </div>
-            <span className="text-xs text-text-muted font-mono">Recent 7 Crawls</span>
-          </CardHeader>
-          <CardBody>
-            <div className="h-64 w-full">
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={recentAuditsTrend}>
-                  <XAxis
-                    dataKey="name"
-                    stroke={isDark ? '#575a65' : '#94a3b8'}
-                    fontSize={11}
-                    tickLine={false}
-                  />
-                  <YAxis
-                    domain={[0, 100]}
-                    stroke={isDark ? '#575a65' : '#94a3b8'}
-                    fontSize={11}
-                    tickLine={false}
-                  />
-                  <Tooltip
-                    contentStyle={{
-                      backgroundColor: isDark ? '#141720' : '#ffffff',
-                      borderColor: isDark ? '#1e222d' : '#e2e8f0',
-                      borderRadius: '8px',
-                      fontSize: '12px',
-                    }}
-                  />
-                  <Bar dataKey="score" fill="#3b82f6" radius={[4, 4, 0, 0]} maxBarSize={36} />
-                </BarChart>
-              </ResponsiveContainer>
-            </div>
-          </CardBody>
-        </Card>
-      </div>
+        {/* Health Trajectory Trends */}
+        <div className="lg:col-span-2 p-6 rounded-2xl bg-surface-muted border border-border shadow-sm flex flex-col justify-between">
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-xs font-mono font-bold uppercase tracking-wider text-text-subtle">
+              Health Score Trajectory
+            </h3>
+            <span className="text-xs text-text-muted font-mono">Last 7 Audit Runs</span>
+          </div>
 
-      {/* Recent Audits Table */}
-      <Card>
-        <CardHeader className="flex items-center justify-between">
-          <h3 className="text-xs font-semibold uppercase tracking-wider text-text-subtle">
-            Recent Website Audits
+          <div className="h-64 w-full">
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart data={recentAuditsTrend}>
+                <XAxis
+                  dataKey="name"
+                  stroke="#727D8B"
+                  fontSize={11}
+                  tickLine={false}
+                />
+                <YAxis
+                  domain={[0, 100]}
+                  stroke="#727D8B"
+                  fontSize={11}
+                  tickLine={false}
+                />
+                <Tooltip
+                  contentStyle={{
+                    backgroundColor: '#11151B',
+                    borderColor: 'rgba(255,255,255,0.1)',
+                    borderRadius: '8px',
+                    fontSize: '12px',
+                  }}
+                />
+                <Bar dataKey="score" fill="#8B7CFF" radius={[6, 6, 0, 0]} maxBarSize={40} />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+      </section>
+
+      {/* High-Precision Audit Log Table */}
+      <section className="rounded-2xl bg-surface-muted border border-border overflow-hidden shadow-sm">
+        <div className="p-6 border-b border-border flex items-center justify-between">
+          <h3 className="text-xs font-mono font-bold uppercase tracking-wider text-text-subtle">
+            Recent Audit Sessions
           </h3>
-          <Link to="/audits" className="text-xs text-accent hover:underline flex items-center gap-1">
-            <span>View All</span>
-            <ArrowRight className="w-3 h-3" />
+          <Link to="/audits" className="text-xs text-accent hover:underline flex items-center gap-1 font-mono">
+            <span>FULL ARCHIVE</span>
+            <ArrowRight className="w-3.5 h-3.5" />
           </Link>
-        </CardHeader>
+        </div>
 
         <div className="overflow-x-auto">
-          <table className="w-full text-left text-xs">
-            <thead className="bg-surface-muted/50 border-b border-border text-text-subtle uppercase tracking-wider font-semibold">
+          <table className="w-full text-left text-xs font-mono">
+            <thead className="bg-surface border-b border-border text-text-subtle uppercase tracking-wider">
               <tr>
-                <th className="py-2.5 px-4">Website</th>
-                <th className="py-2.5 px-4">Status</th>
-                <th className="py-2.5 px-4">Health Score</th>
-                <th className="py-2.5 px-4">Pages</th>
-                <th className="py-2.5 px-4">Issues Found</th>
-                <th className="py-2.5 px-4 text-right">Actions</th>
+                <th className="py-3 px-6">Domain</th>
+                <th className="py-3 px-6">Status</th>
+                <th className="py-3 px-6">Health Score</th>
+                <th className="py-3 px-6">Depth/Pages</th>
+                <th className="py-3 px-6">Findings</th>
+                <th className="py-3 px-6 text-right">Actions</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-border">
               {audits.slice(0, 5).map((audit) => (
-                <tr key={audit.id} className="hover:bg-surface-hover/80 transition-colors">
-                  <td className="py-3 px-4 font-medium text-text">
+                <tr key={audit.id} className="hover:bg-surface-hover/50 transition-colors">
+                  <td className="py-4 px-6 font-medium text-text">
                     <div className="flex items-center gap-2">
-                      <Globe className="w-3.5 h-3.5 text-text-subtle shrink-0" />
+                      <Globe className="w-4 h-4 text-text-subtle shrink-0" />
                       <span className="truncate max-w-xs">{audit.website_url}</span>
                     </div>
                   </td>
-                  <td className="py-3 px-4">
+                  <td className="py-4 px-6">
                     <StatusBadge status={audit.status} />
                   </td>
-                  <td className="py-3 px-4">
+                  <td className="py-4 px-6">
                     <span
-                      className="font-mono font-bold"
+                      className="font-bold text-sm"
                       style={{ color: getHealthScoreColor(audit.health_score, isDark) }}
                     >
                       {audit.health_score.toFixed(1)} / 100
                     </span>
                   </td>
-                  <td className="py-3 px-4 font-mono text-text-muted">
-                    {audit.total_pages_crawled}
+                  <td className="py-4 px-6 text-text-muted">
+                    {audit.total_pages_crawled} pages
                   </td>
-                  <td className="py-3 px-4">
-                    <span className="font-mono text-text font-medium">{audit.total_issues_found}</span>
+                  <td className="py-4 px-6 text-text">
+                    <span className="font-bold">{audit.total_issues_found}</span> issues
                   </td>
-                  <td className="py-3 px-4 text-right">
+                  <td className="py-4 px-6 text-right">
                     <Link to={`/audits/${audit.id}`}>
-                      <Button variant="ghost" size="xs">
-                        View Report
+                      <Button variant="outline" size="xs">
+                        Inspect Report
                       </Button>
                     </Link>
                   </td>
@@ -349,7 +406,7 @@ export const DashboardPage: React.FC = () => {
             </tbody>
           </table>
         </div>
-      </Card>
+      </section>
     </div>
   )
 }

@@ -12,7 +12,7 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined)
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [theme, setThemeState] = useState<ThemeMode>(() => {
     const saved = localStorage.getItem('seo_audit_theme') as ThemeMode
-    return saved === 'dark' || saved === 'light' ? saved : 'light'
+    return saved === 'dark' || saved === 'light' ? saved : 'dark'
   })
 
   useEffect(() => {
