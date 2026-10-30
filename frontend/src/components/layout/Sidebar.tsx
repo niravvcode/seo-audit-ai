@@ -41,11 +41,11 @@ export const Sidebar: React.FC = () => {
   ]
 
   return (
-    <aside className="w-64 border-r border-border bg-surface/70 backdrop-blur-md flex flex-col justify-between p-4 shrink-0 hidden md:flex min-h-[calc(100vh-4rem)] transition-colors">
+    <aside className="w-64 border-r border-border/70 bg-surface/60 backdrop-blur-xl flex flex-col justify-between p-4 shrink-0 hidden md:flex min-h-[calc(100vh-4rem)] transition-colors">
       <div className="space-y-6">
         {sections.map((sec, idx) => (
           <div key={idx} className="space-y-1">
-            <div className="px-3 py-1.5 text-[11px] font-bold text-text-subtle uppercase tracking-wider">
+            <div className="px-3 py-1.5 text-[10px] font-black text-text-subtle uppercase tracking-widest">
               {sec.title}
             </div>
             {sec.items.map((item) => (
@@ -54,10 +54,10 @@ export const Sidebar: React.FC = () => {
                 to={item.to}
                 end={item.to === '/'}
                 className={({ isActive }) =>
-                  `flex items-center gap-3 px-3 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all ${
+                  `flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all ${
                     isActive
-                      ? 'bg-primary text-text-inverse shadow-sm shadow-primary/20 scale-[1.01]'
-                      : 'text-text-muted hover:text-text hover:bg-surface-hover'
+                      ? 'bg-gradient-to-r from-primary to-secondary text-text-inverse shadow-md shadow-primary/25 scale-[1.02]'
+                      : 'text-text-muted hover:text-text hover:bg-surface-hover/80 active:scale-95'
                   }`
                 }
               >
@@ -69,13 +69,14 @@ export const Sidebar: React.FC = () => {
         ))}
       </div>
 
-      <div className="p-3.5 bg-surface-muted border border-border rounded-2xl shadow-sm">
-        <div className="flex items-center gap-2 text-xs font-bold text-text mb-1">
+      <div className="p-4 bg-gradient-to-b from-surface-muted to-surface border border-border/80 rounded-2xl shadow-sm relative overflow-hidden group">
+        <div className="absolute top-0 right-0 w-24 h-24 bg-primary/10 rounded-full blur-xl pointer-events-none group-hover:bg-primary/20 transition-all"></div>
+        <div className="flex items-center gap-2 text-xs font-bold text-text mb-1 relative z-10">
           <ShieldCheck className="w-4 h-4 text-primary" />
-          <span>SSRF Protected Crawler</span>
+          <span>SSRF Cybersecurity</span>
         </div>
-        <p className="text-[11px] text-text-muted leading-relaxed">
-          Autonomous DNS validation prevents internal loopback and cloud metadata SSRF access.
+        <p className="text-[11px] text-text-muted leading-relaxed relative z-10">
+          Autonomous DNS firewall filtering all loopbacks, internal LANs, and cloud metadata.
         </p>
       </div>
     </aside>
